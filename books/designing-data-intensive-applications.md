@@ -1,6 +1,8 @@
 # Designing Data-Intensive Applications
 by Martin Kleppmann
 
+---
+
 ## Chapter 1: Reliable, Scalable, and Maintainable Applications
 * Many applications today are `data-intensive` and not `compute-intensive`, meaning bigger problems are usually the amount of data, the complexity of data, and the speed at which it is changing.
 * A data-intensive application is typically built from building blocks that provide commonly needed functionality. Many applications need to:
@@ -52,5 +54,15 @@ by Martin Kleppmann
   * Set up detailed and clear monitoring, such as performance metrics and error rates.
   * Implement good management practices and training.
  
- ### Scalability
- 
+### Scalability
+* `Scalability` is the term we use to describe a system's ability to cope with increased load.
+
+#### Describing Load
+* Load can be described with a few numbers which we call `load parameters`.
+* The best choice of parameters depends on the architecture of your system: it may be
+  * requests per second to a web server
+  * the ratio of reads to writes in a database
+  * the number of simultaneously active users in a chat room
+  * the hit rate on a cache
+
+#### Describing Performance
