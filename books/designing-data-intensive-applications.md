@@ -66,3 +66,49 @@ by Martin Kleppmann
   * the hit rate on a cache
 
 #### Describing Performance
+* You can look at what happens when load increases in two ways:
+  * When you increase a load parameter and keep system resources fixed, how is the performance of your system affected?
+  * When you increase a load parameter, how much do you need to increase the resources if you want to keep performance unchanged?
+* `Response time` what the client sees, including the time to process the request (the service time) and network delays and queuing delays.
+* `Latency` is the duration that a request is waiting to be handled - during which it is *latent*, awaiting service.
+* The `arithmetic mean` is not a good metrics to describe the *typical* response time, as it doesn't tell you how many users experienced that delay. Prefer `percentiles` instead.
+* *High percentiles* of response times, or *tail latencies*, are important because they directly affect users' experience of the service.
+* Averaging percentiles, such as when combining data from several machines, is mathematically meaningless. The right way of aggregating response time data is to add the histograms.
+
+#### Approaches for Coping with Load
+* `Scaling up`, or `vertical scaling`, is moving to a more powerful machine. `Scaling out`, or `horizontally scaling`, distributes the load across multiple smaller machines.
+* An architecture that scales well for a particular application is built around assumptions of operations will be common and which will be rare - the load parameters.
+* In an early-stage startup it's more important to be able to iterate quickly on product features than to scale beyond some hypothetical future load.
+
+### Maintainability
+* The majority of the cost of software is not in its initial development, but its ongoing maintenance.
+* Three important design principles for maintainability are:
+  * `Operability`: make it easy for the operations teams to keep the system running smoothly.
+  * `Simplicity`: make it easy for new engineers to understand the system by removing complexity.
+  * `Evolvability` (or `extensibility`): make it easy for engineers to adapt the system to unanticipated use cases as requirements change.
+
+#### Operability: Making Life Easy for Operations
+* A good operations team is responsible for:
+  * Monitoring and quickly restoring if it goes into bad state.
+  * Tracking down the cause of problems.
+  * Keeping software and platforms up to date.
+  * Keeping tabs on how different systems affect each other.
+  * Anticipating future problems.
+  * Establishing good practices and tools for development.
+  * Perform complex maintainance tasks, like platform migration.
+  * Maintaining the security of the system.
+  * Defining processes that make operations predictable.
+  * Preserving the organization's knowledge about the system.
+* Good operability means making routine tasks easy.
+
+#### Simplicity: Managing Complexity
+* Making a system simpler does not necessarily mean reducing its functionality; it can also removing *accidental complexity*.
+* `Accidental complexity` is complexity that is not inherent in the problem that the software solves, but arises only from the implementation.
+* Good abstractions are one of the best tools for removing accidental complexity by hiding implementation details, but finding good abstractions is very hard.
+
+#### Evolvability: Making Change Easy
+* Simple and easy-to-understand systems are usually easier to modify than complex ones.
+
+---
+
+## Chapter 2: Data Models and Query Languages
