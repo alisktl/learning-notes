@@ -1,7 +1,7 @@
 # Designing Data-Intensive Applications
 by Martin Kleppmann
 
-- [Chapter 1: Reliable, scalable, and Maintainable Applications](#chapter-1-reliable-scalable-and-maintainable-applications)
+- [Chapter 1: Reliable, Scalable, and Maintainable Applications](#chapter-1-reliable-scalable-and-maintainable-applications)
   - [Reliability](#reliability)
   - [Scalability](#scalability)
   - [Maintainability](#maintainability)
