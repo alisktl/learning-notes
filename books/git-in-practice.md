@@ -1,6 +1,14 @@
 # Git in Practice
 by Mike McQuaid
 
+1. Part 1. Introduction to Git
+    1. [Chapter 1: Local Git](#chapter-1-local-git)
+        1. [Technique 1: `git init`](#technique-1-creating-a-repository-git-init)
+        2. [Technique 2: `git add`](#technique-2-building-a-new-commit-in-the-index-staging-area-git-add)
+        3. [Technique 3: `git commit`](#technique-3-committing-changes-to-files-git-commit)
+        4. [Technique 4: `git log`](#technique-4-viewing-history-git-log-gitk-gitx)
+        5. [Technique 5: `git diff`](#technique-5-viewing-the-differences-between-commits-git-diff)
+
 ---
 
 ## Chapter 1: Local Git
@@ -43,4 +51,20 @@ git commit --message 'Initial commit of book.'
 #### Show a list of all the commits made to a repository
 ```
 git log
+```
+
+### Technique 5: Viewing the differences between commits: `git diff`
+#### Show changes between commit *master~1* (before commit *master*) and *master* commit
+```
+git diff master~1 master
+```
+
+#### Show changes between commits and a brief overview of how many lines were involved in the changes
+```
+git diff --stat master~1 master
+```
+
+#### Show changes between commits and show modifications per word rather than per line
+```
+git diff --word-diff master~1 master
 ```
