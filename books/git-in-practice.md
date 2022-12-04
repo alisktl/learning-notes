@@ -69,3 +69,22 @@ git diff --stat master~1 master
 ```
 git diff --word-diff master~1 master
 ```
+
+---
+
+## Chapter 2: Remote Git
+### Technique 6: Adding a remote repository: `git remote add`
+#### Add a new remote repository
+```
+git remote add origin https://github.com/alisktl/GitInPracticeRedux.git
+```
+
+#### Verify that this remote has been created successfully
+```
+git remote --verbose
+```
+
+### Technique 7: Pushing changes to a remote repository: `git push`
+```
+git push --set-upstream origin master
+```
