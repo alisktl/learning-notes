@@ -3,11 +3,12 @@ by Mike McQuaid
 
 1. Part 1. Introduction to Git
     1. [Chapter 1: Local Git](#chapter-1-local-git)
-        1. [Technique 1: `git init`](#technique-1-creating-a-repository-git-init)
-        2. [Technique 2: `git add`](#technique-2-building-a-new-commit-in-the-index-staging-area-git-add)
-        3. [Technique 3: `git commit`](#technique-3-committing-changes-to-files-git-commit)
-        4. [Technique 4: `git log`](#technique-4-viewing-history-git-log-gitk-gitx)
-        5. [Technique 5: `git diff`](#technique-5-viewing-the-differences-between-commits-git-diff)
+        1. [Initial setup](#initial-setup)
+        2. [Technique 1: `git init`](#technique-1-creating-a-repository-git-init)
+        3. [Technique 2: `git add`](#technique-2-building-a-new-commit-in-the-index-staging-area-git-add)
+        4. [Technique 3: `git commit`](#technique-3-committing-changes-to-files-git-commit)
+        5. [Technique 4: `git log`](#technique-4-viewing-history-git-log-gitk-gitx)
+        6. [Technique 5: `git diff`](#technique-5-viewing-the-differences-between-commits-git-diff)
 
 ---
 
