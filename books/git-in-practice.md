@@ -88,3 +88,53 @@ git remote --verbose
 ```
 git push --set-upstream origin master
 ```
+
+### Technique 8: Cloning a remote/GitHub repository onto your local machine: `git clone`
+```
+git clone https://github.com/alisktl/GitInPracticeRedux.git
+```
+
+### Technique 9: Pulling changes from another repository: `git pull`
+```
+git pull
+```
+> **Note:** `git pull` performs two actions: fetching the changes from a remote repository and merging them into the current branch.
+
+### Technique 10: Fetching changes from a remote without modifying local branches: `git fetch`
+```
+git fetch
+```
+
+### Technique 11: Creating a new local branch from the current branch: `git branch`
+#### See all branches
+```
+git branch
+```
+
+#### Create a new branch `chapter-two`
+```
+git branch chapter-two
+```
+
+### Technique 12: Checking out a local branch: `git checkout`
+#### Switch to a newly created branch
+```
+git checkout chapter-two
+```
+> **Note:** the `HEAD` pointer is updated to point to the current, `chapter-two` branch pointer, which in turn points to the top commit of that branch.
+
+### Technique 13: Pushing a local branch remotely
+```
+git push --set-upstream origin chapter-two
+```
+
+### Technique 14: Merging an existing branch into the current branch: `git merge`
+#### Change current branch to `master`
+```
+git checkout master
+```
+
+#### Merge `chapter-two` branch to `master`
+```
+git merge chapter-two
+```
