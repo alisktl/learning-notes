@@ -138,3 +138,17 @@ git checkout master
 ```
 git merge chapter-two
 ```
+
+### Technique 15: Deleting a remote branch
+```
+git push origin :chapter-two
+```
+or
+```
+git push --delete origin chapter-two
+```
+
+### Technique 16: Deleting the current local branch after merging
+```
+git branch --delete chapter-two
+```
