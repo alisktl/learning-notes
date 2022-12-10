@@ -9,6 +9,18 @@ by Mike McQuaid
         4. [Technique 3: `git commit`](#technique-3-committing-changes-to-files-git-commit)
         5. [Technique 4: `git log`](#technique-4-viewing-history-git-log-gitk-gitx)
         6. [Technique 5: `git diff`](#technique-5-viewing-the-differences-between-commits-git-diff)
+    2. [Chapter 2: Remote Git](#chapter-2-remote-git)
+        1. [Technique 6: `git remote add`](#technique-6-adding-a-remote-repository-git-remote-add)
+        2. [Technique 7: `git push`](#technique-7-pushing-changes-to-a-remote-repository-git-push)
+        3. [Technique 8: `git clone`](#technique-8-cloning-a-remotegithub-repository-onto-your-local-machine-git-clone)
+        4. [Technique 9: `git pull`](#technique-9-pulling-changes-from-another-repository-git-pull)
+        5. [Technique 10: `git fetch`](#technique-10-fetching-changes-from-a-remote-without-modifying-local-branches-git-fetch)
+        6. [Technique 11: `git branch`](#technique-11-creating-a-new-local-branch-from-the-current-branch-git-branch)
+        7. [Technique 12: `git checkout`](#technique-12-checking-out-a-local-branch-git-checkout)
+        8. [Technique 13: Pushing a local branch remotely](#technique-13-pushing-a-local-branch-remotely)
+        9. [Technique 14: `git merge`](#technique-14-merging-an-existing-branch-into-the-current-branch-git-merge)
+        10. [Technique 15: Deleting a remote branch](#technique-15-deleting-a-remote-branch)
+        11. [Technique 16: Deleting the current local branch after merging](#technique-16-deleting-the-current-local-branch-after-merging)
 
 ---
 
