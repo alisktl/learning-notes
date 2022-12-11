@@ -164,3 +164,9 @@ git push --delete origin chapter-two
 ```
 git branch --delete chapter-two
 ```
+
+---
+
+
+## Chapter 3: Filesystem interactions
+### Technique 17: Renaming or moving a file: `git mv`
