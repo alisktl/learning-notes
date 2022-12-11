@@ -22,7 +22,7 @@ by Mike McQuaid
         10. [Technique 15: Deleting a remote branch](#technique-15-deleting-a-remote-branch)
         11. [Technique 16: Deleting the current local branch after merging](#technique-16-deleting-the-current-local-branch-after-merging)
 2. Part 2. Git essentials
-    1. [Chapter 3: Filesystem interactions]
+    1. [Chapter 3: Filesystem interactions](#chapter-3-filesystem-interactions)
         1. [Technique 17: `git mv`](#technique-17-renaming-or-moving-a-file-git-mv)
         2. [Technique 18: `git rm`](#technique-18-removing-a-file-git-rm)
         3. [Technique 19: `git reset`](#technique-19-resetting-files-to-the-last-commit-git-reset)
