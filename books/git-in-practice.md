@@ -21,6 +21,11 @@ by Mike McQuaid
         9. [Technique 14: `git merge`](#technique-14-merging-an-existing-branch-into-the-current-branch-git-merge)
         10. [Technique 15: Deleting a remote branch](#technique-15-deleting-a-remote-branch)
         11. [Technique 16: Deleting the current local branch after merging](#technique-16-deleting-the-current-local-branch-after-merging)
+2. Part 2. Git essentials
+    1. [Chapter 3: Filesystem interactions]
+        1. [Technique 17: `git mv`](#technique-17-renaming-or-moving-a-file-git-mv)
+        2. [Technique 18: `git rm`](#technique-18-removing-a-file-git-rm)
+        3. [Technique 19: `git reset`](#technique-19-resetting-files-to-the-last-commit-git-reset)
 
 ---
 
@@ -167,6 +172,35 @@ git branch --delete chapter-two
 
 ---
 
-
 ## Chapter 3: Filesystem interactions
 ### Technique 17: Renaming or moving a file: `git mv`
+```
+git mv old-name.file new-name.gile
+```
+```
+git commit -m "Rename old-name.file to new-name.file"
+```
+
+### Technique 18: Removing a file: `git rm`
+```
+git rm old-name.file
+```
+```
+git commit -m "Remove old-name.file"
+```
+
+### Technique 19: Resetting files to the last commit: `git reset`
+#### Reset both the index `staging area` and the `working directory` to the state of the previous commit on the current branch.
+```
+git reset --hard
+```
+#### Reset the index `staging area` but not the contents of the `working directory`.
+```
+git reset
+```
+or
+```
+git reset --mixed
+```
+
+### Technique 20: Deleting untracked files: `git clean`
