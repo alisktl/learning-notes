@@ -26,6 +26,15 @@ by Mike McQuaid
         1. [Technique 17: `git mv`](#technique-17-renaming-or-moving-a-file-git-mv)
         2. [Technique 18: `git rm`](#technique-18-removing-a-file-git-rm)
         3. [Technique 19: `git reset`](#technique-19-resetting-files-to-the-last-commit-git-reset)
+        4. [Technique 20: `git clean`](#technique-20-deleting-untracked-files-git-clean)
+        5. [Technique 21: `.gitignore`](#technique-21-ignoring-files-gitignore)
+        6. [Technique 22: Deleting ignored files](#technique-22-deleting-ignored-files)
+        7. [Technique 23: `git stash`](#technique-23-temporarily-stashing-some-changes-git-stash)
+        8. [Technique 24: `git stash pop`](#technique-24-reapplying-stashed-changes-git-stash-pop)
+        9. [Technique 25: `git stash clear`](#technique-25-clearing-stashed-changes-git-stash-clear)
+        10. [Technique 26: Assuming files are unchanged](#technique-26-assuming-files-are-unchanged)
+        11. [Technique 27: Listing assumed-unchanged files](#technique-27-listing-assumed-unchanged-files)
+        12. [Technique 28: Stopping assuming files are unchanged](#technique-28-stopping-assuming-files-are-unchanged)
 
 ---
 
