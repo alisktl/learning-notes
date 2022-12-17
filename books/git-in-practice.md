@@ -204,3 +204,36 @@ git reset --mixed
 ```
 
 ### Technique 20: Deleting untracked files: `git clean`
+#### View the files that are currently tracked
+```
+git ls-files
+```
+#### View the currently untracked files
+```
+git ls-files --others
+```
+or
+```
+git ls-files -o
+```
+#### Delete untracked files (files that are in `working directory`)
+```
+git clean --force
+```
+
+### Technique 21: Ignoring files: `.gitignore`
+#### Ignore all *.tmp* files.
+Create an `.gitignore` file and add line **.tmp*
+```
+*.tmp
+```
+
+### Technique 22: Deleting ignored files
+#### Delete all files that are ignored by `.gitignore`
+```
+git clean --force -X
+```
+#### Delete all ignored files and all the untracked files (files that are in `working directory`)
+```
+git clean -x
+```
