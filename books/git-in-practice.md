@@ -237,3 +237,38 @@ git clean --force -X
 ```
 git clean -x
 ```
+
+### Technique 23: Temporarily stashing some changes: `git stash`
+#### Stashing uncommitted changes
+```
+git stash
+```
+or
+```
+git stash save
+```
+#### List of stashes
+```
+git stash list
+```
+#### Difference between `working directory` and stash
+```
+git diff stash@{0}
+```
+
+### Technique 24: Reapplying stashed changes: `git stash pop`
+#### `git stash pop`
+After running the following command the top stash on the stack is applied to the working directory and removed from the stack:
+```
+git stash pop
+```
+#### `git stash apply`
+After running the following command the top stash on the stack is applied to the working directory but keeps the top stack stash on the stack so it can be run again to reapply:
+```
+git stash apply
+```
+
+### Technique 25: Clearing stashed changes: `git stash clear`
+```
+git stash clear
+```
