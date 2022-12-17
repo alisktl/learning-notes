@@ -272,3 +272,20 @@ git stash apply
 ```
 git stash clear
 ```
+
+### Technique 26: Assuming files are unchanged
+#### Git will ignore any changes made to *some_file.txt*
+```
+git update-index --assume-unchanged some_file.txt
+```
+
+### Technique 27: Listing assumed-unchanged files
+```
+git ls-files -v
+```
+
+### Technique 28: Stopping assuming files are unchanged
+#### Stop assuming there have been no changes made to *some_file.txt*
+```
+git update-index --no-assume-unchanged some_file.txt
+```
