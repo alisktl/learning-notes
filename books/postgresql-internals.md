@@ -194,7 +194,7 @@ CASE attstorage
   WHEN 'm' THEN 'main'
   WHEN 'x' THEN 'extended'
 END AS storage
-FROM pg_catalog.pg_attribute
+FROM pg_attribute
 WHERE attrelid = 't'::regclass AND attnum > 0;
 ```
 output:
@@ -208,6 +208,12 @@ output:
 (4 строки)
 ```
 
+Стратегии состоят в следующем:
+
+- **plain** – TOAST не используется (стратегия применяется для заведомо "коротких" типов данных, как **integer**).
+- **extended** – допускается как сжатие, так и хранение в отдельной toast-таблице.
+- **external** – длинные значения хранятся в toast-таблице несжатыми.
+- **main** – длинные значения в первую очередь сжимаются, а в toast-таблицу попадают, только если сжатие не помогло.
 
 
 
