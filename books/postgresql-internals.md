@@ -187,9 +187,26 @@ TOAST подразумевает несколько стратегий. Длин
 ```
 или
 ```
-SELECT attname
+SELECT attname, atttypid::regtype,
+CASE attstorage
+  WHEN 'p' THEN 'plain'
+  WHEN 'e' THEN 'external'
+  WHEN 'm' THEN 'main'
+  WHEN 'x' THEN 'extended'
+END AS storage
+FROM pg_catalog.pg_attribute
+WHERE attrelid = 't'::regclass AND attnum > 0;
 ```
-
+output:
+```
+ attname | atttypid | storage  
+---------+----------+----------
+ a       | integer  | plain
+ b       | numeric  | main
+ c       | text     | extended
+ d       | json     | extended
+(4 строки)
+```
 
 
 
