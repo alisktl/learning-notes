@@ -82,7 +82,7 @@ SELECT pg_relation_filepath('t');
 
 output:
 ```
-base/16384/16385
+base/24576/24577
 (1 row)
 ```
 
@@ -94,7 +94,7 @@ output:
 ```
   oid  
 -------
- 16384
+ 24576
 (1 строка)
 ```
 
@@ -105,14 +105,14 @@ output:
 ```
  relfilenode 
 -------------
-       16385
+       24577
 (1 строка)
 ```
 
 Вот соответствующий файл в файловой системе:
 ```
 SELECT size
-FROM pg_stat_file('/user/local/pgsql/data/base/16384/16385');
+FROM pg_stat_file('/user/local/pgsql/data/base/24576/24577');
 ```
 output:
 ```
@@ -125,7 +125,7 @@ output:
 - `Слой инициализации` (**init fork**) – существует только для нежурналируемых таблиц (созданных с указанием UNLOGGED) и их индексов. Такие объекты ничем не отличаются, кроме того, что действия и ними не записываются в журнал предзаписи. За счет этого работа с ними происходит быстрее, но в случае сбоя невозможно восстановить данные в согласованном состоянии. Он имеет такое же имя, как и основной слой, но с суффиксом `_init`:
 ```
 SELECT size
-FROM pg_stat_file('/user/local/pgsql/data/base/16384/16385_init');
+FROM pg_stat_file('/user/local/pgsql/data/base/24576/24577_init');
 ```
 output:
 ```
@@ -141,7 +141,7 @@ VACUUM t;
 ```
 ```
 SELECT size
-FROM pg_stat_file('/user/local/pgsql/data/base/16384/16385_fsm');
+FROM pg_stat_file('/user/local/pgsql/data/base/24576/24577_fsm');
 ```
 output:
 ```
@@ -158,7 +158,7 @@ output:
 Файл карты видимости имеют суффикс `_vm`. Обычно они самые небольшие по размеру:
 ```
 SELECT size
-FROM pg_stat_file('/user/local/pgsql/data/base/16384/16385_vm');
+FROM pg_stat_file('/user/local/pgsql/data/base/24576/24577_vm');
 ```
 output:
 ```
@@ -219,6 +219,9 @@ output:
 ```
 ALTER TABLE t ALTER COLUMN d SET STORAGE external;
 ```
+Для сжатия доступны два алгоритма: PGLZ (по умолчанию) и LZ4. Эталонные тесты показывают, что при сходном с PGLZ уровне сжатия LZ4 тратит меньше ресурсов процессора.
+
+Toast-таблицы располагаются в отдельной схеме `pg_toast`, не входящей в путь поиска, и поэтому обычно не видны. Для временных используется схема `pg_toast_temp_N` аналогично обычной `pg_temp_N`.
 
 
 
