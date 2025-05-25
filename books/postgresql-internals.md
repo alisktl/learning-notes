@@ -716,8 +716,29 @@ COMMIT;
 
 
 
+```
+SELECT * FROM accounts WHERE client = 'bob';
+```
 
+```
+BEGIN;
+UPDATE accounts SET amount = amount - 100 WHERE id = 3;
+```
 
+```
+UPDATE accounts SET amount = amount * 1.01
+WHERE client IN (
+  SELECT client
+  FROM accounts
+  GROUP BY client
+  HAVING sum(amount) >= 1000
+);
+```
+
+```
+COMMIT;
+SELECT * FROM accounts WHERE client = 'bob';
+```
 
 
 
