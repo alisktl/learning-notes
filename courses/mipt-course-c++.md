@@ -94,5 +94,24 @@ v.push_back(6);
 v.pop_back();
 ```
 
+#### `std::set<int>` и `std::multiset<int>`, `std::map<std::string, int>` и `std::multimap<std::string, int>`
+set:
+```
+std::set<int> s;
+s.size();
+s.insert(3);
+s.erase(3);
+s.count(2);
 
+for (int x: s) {
+  std::cout << x << '\n';
+}
+```
 
+map:
+```
+std::map<std::string, int> m;
+m["abc"] = 1;
+m["aaa"] = 2;
+std::cout << m["aaa"];
+```
