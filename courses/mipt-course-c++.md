@@ -331,7 +331,36 @@ std::cout << sizeof x << '\n' // 4
 ## Приоритет операторов
 [C++ Operator Precedence](https://en.cppreference.com/w/cpp/language/operator_precedence.html)
 
+## Управляющие конструкции (Control statements)
+### *if*
+```
+if (bool-expr) statement; {}
+[else statement;]
+```
 
+### *while*
+```
+while (bool-expr) statement;
+```
+
+### *while-do*
+```
+do statement; while (bool-expr);
+```
+
+### *for*
+```
+for (init-statement; bool-expr; expr) statement;
+```
+
+### *switch*
+```
+switch (x) {
+  case 1: statements; break;
+  case 2: statements; break;
+  default: statements; break;
+}
+```
 
 
 
