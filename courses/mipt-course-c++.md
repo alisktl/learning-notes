@@ -442,7 +442,7 @@ int main() {
 }
 ```
 
-## Реализация ыункции `swap`
+## Реализация функции `swap`
 ```
 void swap(int* a, int* b) {
   int temp = *a;
