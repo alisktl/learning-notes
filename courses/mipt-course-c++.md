@@ -606,9 +606,106 @@ int main() {
 
 # Указатели на функции. Ссылки. Константы
 
+## Функции с переменным числом аргументов и с аргументами по умолчанию
 
+### Функции с переменным числом аргументов (*Variadic functions*)
+TODO: add
 
+### Функции c аргументами по умолчанию
+```
+double f(int x, double d = 0.5) {
+  return x * d;
+}
 
+int main() {
+  std::cout << f(10) << '\n';  // 5
+  std::cout << f(10, 0.7) << '\n';  // 7
+}
+```
+
+Нельзя перегружать функции c аргументами по умолчанию с меньшим кол-вом аргументов:
+```
+// Compilation error
+double f(int x) {
+  return x * 0.5;
+}
+```
+
+Можно перегружать функции c аргументами по умолчанию с одинаковым кол-вом аргументов:
+```
+// Compiles
+double f(double x, double d = 2) {
+  return x * d;
+}
+```
+
+## Указатели на функции, пример применения для сортировки
+```
+double f(int x, double d) {
+    return x * d;
+}
+
+int main() {
+  double (*p)(int, double) = &f;
+
+  std::cout << p << std::endl;  // always prints '1' for function pointer
+  std::cout << p(3, 4) << std::endl;  // 12
+}
+```
+
+### Применение указателя на функцию как аргумент
+```
+// Сортировка по близости к числу 5
+bool compare(int x, int y) {
+    return abs(x - 5) < abs(y - 5);
+}
+
+int main() {
+  int nums[10] = {5, 3, 6, 7, 10, 2, 3, 6, 7, 3};
+  std::sort(nums, nums + 10, &compare);
+  //std::sort(nums, nums + 10, compare);
+
+  for (auto num: nums) {
+    std::cout << num << ' ';
+  }
+
+  std::cout << std::endl;
+}
+```
+
+## *inline* функции (Встраиваемые функции)
+Ключевое слово *inline* встраивает машинный код функции не отдельно, а в линии, где оно будет вызвано.
+
+**NOTE**: Не желательно использовать *inline*.
+
+## Ссылки
+```
+int a = 5;
+int& b = a;
+
+vector<int> v = {1, 2, 3};
+vector<int>& v2 = v;
+```
+
+На данный момент, мы должны воспринимать так: ссылки - это то же самое, что и переменная. Если изменяется одно, то и другое изменяется (вернее, не изменяется, а просто ссылается на один адрес в памяти).
+
+## Особенности инициализации ссылок
+```
+void f(int a) {
+  a += 1;
+}
+
+void f(int& a) {
+  a += 1;
+}
+
+int a = 1;
+
+f(a);  // Compilation error
+int& r;  // Compilation error
+int& r = 5;  // Compilation error
+int&* p = &a;  // Compilation error
+```
 
 
 
