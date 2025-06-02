@@ -707,6 +707,18 @@ int& r = 5;  // Compilation error
 int&* p = &a;  // Compilation error
 ```
 
+## Перегрузка функций с аргументами с сылками и без
+**Compilation Error:**
+```
+void f(int a) {
+  ...
+}
+
+void f(int& a) {
+  ...
+}
+```
+
 ## Реализация *swap* с использованием ссылок
 ```
 void swap(int& a, int& b) {
