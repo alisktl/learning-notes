@@ -707,7 +707,73 @@ int& r = 5;  // Compilation error
 int&* p = &a;  // Compilation error
 ```
 
+## Реализация *swap* с использованием ссылок
+```
+void swap(int& a, int& b) {
+  int t = a;
+  a = b;
+  b = t;
+}
 
+int main() {
+  int a = 4;
+  int b = 6;
+  swap(a, b);
+  std::cout << "a = " << a << '\n';
+  std::cout << "b = " << b << std::endl;
+}
+```
+
+## Как компилятор реализовывает ссылки
+```
+void f(int &r);
+
+int main() {
+    int x = 0;
+    int *p = &x;
+    int &r = x;
+    int y = 1;
+    double d = 3.14;
+
+    std::cout << &d << ' ' << &y << ' ' << &p << ' ' << &x << ' ' << '\n';
+    f(x);
+}
+
+void f(int &r) {
+    int x = 0;
+    int *p = &x;
+    std::cout << &r << '\n';
+    std::cout << &x << ' ' << &p << '\n';
+
+    std::cout << &p - 1 << ' ' << *(&p - 1) << '\n';
+    std::cout << &p - 2 << ' ' << *(&p - 2) << '\n';
+    std::cout << &p - 3 << ' ' << *(&p - 3) << '\n';
+
+    for (int i = 4; i <= 200; i++) {
+        std::cout << &p - i << ' ' << *(&p - i) << '\n';
+    }
+}
+```
+
+## Возвращение ссылок функций, проблема *dangling reference*
+```
+int& f(int& x) {
+  ++x;
+  return x;
+}
+
+int& f(int x) {
+  ++x;
+  return x;
+}
+
+int main() {
+  int a = 3;
+  f(a);  // OK
+
+  g(a);  // Undefined Bahaviour
+}
+```
 
 
 
