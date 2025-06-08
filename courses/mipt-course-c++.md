@@ -610,6 +610,8 @@ int main() {
 
 Правила перегрузки можно посмотреть [здесь](https://en.cppreference.com/w/cpp/language/overload_resolution.html)
 
+---
+
 # Указатели на функции. Ссылки. Константы
 
 ## Функции с переменным числом аргументов и с аргументами по умолчанию
@@ -1287,7 +1289,216 @@ int main() {
 
 **Node:** списки инициализации полей в конструкторах предпочтительней чем предыдущий вариант. Используя списки инициализации полей поля сразу инизиализируются аргументами, и не будут изначально инициализироваться дефолтными значениями. Эта разница сильнее заметна если использовать не примитивные типы в полях, а например *string* или *vector*.
 
+---
+
 # Конструкторы, деструкторы, оператор присваивания и "правило трех"
+
+## Конструкторы по умолчанию
+Конструктор по умолчанию создается, если других конструкторов нет.
+```
+class Complex {
+private:
+  double re = 0.0;
+  double im = 0.0;
+};
+
+int main() {
+  Complex c;
+}
+```
+
+## Пример, когда нужен нетривиальный конструктор
+```
+class String {
+private:
+  char* str = nullptr;
+  size_t sz = 0;
+
+public:
+  String(size_t n, char c): str(new char[n]), sz(n) {
+    memset(str, c, n); // выделение ("захват") памяти
+  }
+
+  void print() {
+    for (size_t i = 0; i < sz; ++i)
+      std::cout << str[i];
+    std::cout << '\n';
+  }
+};
+
+int main() {
+  String s(10, 'b');
+  s.print();
+}
+```
+
+## Понятие деструктора и пример, когда нужен нетривиальный деструктор
+Деструктор вызывается, когда объект выходит из области видимости.
+```
+class String {
+private:
+  char* str = nullptr;
+  size_t sz = 0;
+
+public:
+  String(size_t n, char c): str(new char[n]), sz(n) {
+    memset(str, c, sz); // выделение ("захват") памяти
+  }
+
+  ~String() {
+    std::cout << "Destructor called" << '\n';
+    delete[] str;
+  }
+
+  void print() {
+    for (size_t i = 0; i < sz; ++i)
+      std::cout << str[i];
+    std::cout << '\n';
+  }
+};
+
+int main() {
+  String s(10, 'a');
+  {
+    String s(10, 'b');
+    s.print();
+  }
+
+  s.print();
+}
+```
+
+## Порядок вызова конструкторов и деструкторов в разных ситуациях
+Порядок вызова конструкторов и деструкторов такой же, как и у стека.
+
+## Конструктор копирования и его особенности
+```
+class String {
+private:
+  char* str = nullptr;
+  size_t sz = 0;
+
+public:
+  String(size_t n, char c): str(new char[n]), sz(n) {
+    memset(str, c, sz); // выделение ("захват") памяти
+  }
+
+  String(const String& s): str(new char[s.sz]), sz(s.sz) {
+    memcpy(str, s.str, sz);
+  }
+
+  ~String() {
+    std::cout << "Destructor called" << '\n';
+    delete[] str;
+  }
+
+  void print() {
+    for (size_t i = 0; i < sz; ++i)
+      std::cout << str[i];
+    std::cout << '\n';
+  }
+};
+
+int main() {
+  String s(10, 'a');
+  String s_copy = s;
+
+  s_copy.print();
+}
+```
+
+## Ключевые слова `default` и `delete`
+
+### Ключевое слово `default`
+Можно попросить компилятор создать конструктор по умолчанию.
+```
+class String {
+private:
+  char* str = nullptr;
+  size_t sz = 0;
+
+public:
+  // конструктор по умолчанию
+  String() = default;
+  String(size_t n, char c): str(new char[n]), sz(n) {
+    memset(str, c, sz); // выделение ("захват") памяти
+  }
+
+  // конструктор копирования по умолчанию
+  String(String& s) = default;
+
+  String(const String& s): str(new char[s.sz]), sz(s.sz) {
+    memcpy(str, s.str, sz);
+  }
+
+  ~String() {
+    std::cout << "Destructor called" << '\n';
+    delete[] str;
+  }
+
+  void print() const {
+    for (size_t i = 0; i < sz; ++i)
+      std::cout << str[i];
+    std::cout << '\n';
+  }
+};
+
+int main() {
+  String s1;
+  s1.print();
+
+  String s2(5, 'a');
+  s2.print();
+
+  String s3 = s2;
+  s3.print();
+}
+```
+
+Но в этом примере будет ошибка, поскольку,
+```
+String(String& s) = default;
+```
+это «поверхностный» (shallow) копирующий конструктор: он просто копирует значение указателя str и поле sz. В результате и у `s2`, и у `s3` одно и то же поле `str` указывает на один и тот же буфер в куче.
+
+### Ключевое слово `delete`
+Ключевое слово `delete` – запрещает создавать конструктор
+```
+class String {
+private:
+  char* str = nullptr;
+  size_t sz = 0;
+
+public:
+  // Запретить создавать такой конструктор
+  String() = delete;
+
+  void print() const {
+    for (size_t i = 0; i < sz; ++i)
+      std::cout << str[i];
+    std::cout << '\n';
+  }
+};
+
+int main() {
+  String s1;
+  s1.print();
+}
+```
+
+## Делегирующие конструкторы
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
