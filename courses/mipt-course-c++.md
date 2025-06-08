@@ -1487,7 +1487,39 @@ int main() {
 ```
 
 ## Делегирующие конструкторы
+```
+class String {
+private:
+  char* str = nullptr;
+  size_t sz = 0;
 
+public:
+  String() = delete;
+
+  String(size_t n, char c): str(new char[n]), sz(n) {
+    memset(str, c, sz);
+  }
+
+  // Делегирующий конструктор
+  String(const String& s): String(s.sz, '\0') {
+    memcpy(str, s.str, sz);
+  }
+
+  void print() const {
+    for (size_t i = 0; i < sz; ++i)
+      std::cout << str[i];
+    std::cout << '\n';
+  }
+};
+
+int main() {
+  String s1(5, 'a');
+  s1.print();
+
+  String s2 = s1;
+  s2.print();
+}
+```
 
 
 
