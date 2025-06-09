@@ -1521,15 +1521,142 @@ int main() {
 }
 ```
 
+## Оператор присваивания и его особенности
+```
+class String {
+private:
+    char* str = nullptr;
+    size_t sz = 0;
 
+public:
+    String() = delete;
 
+    String(size_t n, char c): str(new char[n]), sz(n) {
+        memset(str, c, sz);
+    }
 
+    String(const String& s): String(s.sz, '\0') {
+        memcpy(str, s.str, sz);
+    }
 
+    // Оператор присваивания
+    String& operator=(const String& s) {
+        std::cout << "operator= called" << '\n';
 
+        delete[] str;
+        str = new char[s.sz];
+        sz = s.sz;
+        memcpy(str, s.str, sz);
+        return *this;
+    }
 
+    ~String() {
+        std::cout << "Destructor called" << '\n';
+        delete[] str;
+    }
 
+    void print() const {
+        std::cout << str << '\n';
+    }
+};
 
+int main() {
+    String s1(5, 'a');
+    String s2(5, 'b');
 
+    // Присваивание
+    s2 = s1;
+    s2.print();
+}
+```
+
+## Оператор присваивания: идиома `copy & swap`
+```
+class String {
+private:
+    char* str = nullptr;
+    size_t sz = 0;
+
+public:
+    String() = delete;
+
+    String(size_t n, char c): str(new char[n]), sz(n) {
+        memset(str, c, sz);
+    }
+
+    // Оператор копирования
+    String(const String& s): String(s.sz, '\0') {
+        memcpy(str, s.str, sz);
+    }
+
+    void swap(String& s) {
+      std::swap(str, s.str);
+      std::swap(sz, s.sz);
+    }
+
+    // Оператор присваивания (Copy & Swap)
+    String& operator=(const String& s) {
+        std::cout << "operator= called" << '\n';
+
+        // Копирование
+        String copy = s;
+        swap(copy);
+        return *this;
+    }
+
+    ~String() {
+        std::cout << "Destructor called" << '\n';
+        delete[] str;
+    }
+
+    void print() const {
+        std::cout << str << '\n';
+    }
+};
+
+int main() {
+    String s1(5, 'a');
+    String s2(5, 'b');
+
+    // Присваивание
+    s2 = s1;
+    s2.print();
+}
+```
+
+## Rule of Three
+Ранее, мы определяли два класса (структуры): Complex и String. Если для **Complex** можно использовать конструктор копирования, деструктор и оператор присваивания по умолчанию (*default*), то для **String** надо использовать нетривиальные конструктор копирования, деструктор и оператор присваивания.
+
+[**Правило трех**](https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%BE_%D1%82%D1%80%D1%91%D1%85_(C%2B%2B)) – если надо создать хотя бы один нетривиальный из трех (конструктор копирования, деструктор и оператор присваивания), то надо создать все три.
+
+## Оператор присваивания `lvalue` и `rvalue`
+### Оператор присваивания `lvalue`
+```
+String& operator=(const String& s) & {
+  std::cout << "operator= called" << '\n';
+
+  // Копирование
+  String copy = s;
+  swap(copy);
+  return *this;
+}
+```
+
+### Оператор присваивания `rvalue`
+```
+String& operator=(const String& s) && {
+  std::cout << "operator= called" << '\n';
+
+  // Копирование
+  String copy = s;
+  swap(copy);
+  return *this;
+}
+```
+
+---
+
+# Перегрузка операторов, константные и статические методы
 
 
 
