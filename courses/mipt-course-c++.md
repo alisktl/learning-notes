@@ -1658,6 +1658,123 @@ String& operator=(const String& s) && {
 ---
 
 # Перегрузка операторов, константные и статические методы
+## Какие операторы можно перегружать
+- `+`, `-`, `*`, `/`, `%`
+- `>`, `<`, `==`, `<=`, `>=`
+- `<<`, `>>`, `&`, `|`, `^`
+- `&&`, `||`, `,`
+- `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `<<=`, `>>=`, `^=`, `&=`, `|=`
+- `()`, `[]`
+- `*` [pointer], `&` [reference]
+
+## Какие операторы нельзя перегружать
+- `.`, `::`, `?:`
+
+## Два способа перегрузить бинарный оператор
+### Способ #1
+```
+class BigInt {
+  BigInt operator+(const BigInt&); // binary operator
+};
+
+int main() {
+  BigInt a;
+  BigInt b;
+
+  a + b;
+  a.operator+(b);
+}
+```
+
+### Способ #2
+```
+class BigInt {
+  ...
+};
+
+BigInt operator+(const BigInt&, const BigInt&);
+
+int main() {
+  BigInt a;
+  BigInt b;
+
+  a + b;
+}
+```
+
+### Пример: операторы `+` и `+=`
+### Бинарный оператор `+`
+```
+class BigInt {
+private:
+  int a;
+
+public:
+  explicit BigInt(int a): a(a) {}
+
+  BigInt operator+(const BigInt &other) const {
+    return BigInt(a + other.a);
+  }
+
+  friend std::ostream &operator<<(std::ostream &os, const BigInt &obj) {
+    return os << obj.a;
+  }
+};
+
+int main() {
+  BigInt a(10);
+  BigInt b(13);
+
+  BigInt c = a + b;
+  std::cout << "Result: " << c << std::endl;
+}
+```
+
+### Бинарный оператор `+=`
+```
+class BigInt {
+private:
+  int a;
+
+public:
+  explicit BigInt(int a): a(a) {}
+
+  BigInt &operator+=(const BigInt &other) {
+    a += other.a;
+    return *this;
+  }
+
+  friend std::ostream &operator<<(std::ostream &os, const BigInt &obj) {
+    return os << obj.a;
+  }
+};
+
+int main() {
+  BigInt a(10);
+  BigInt b(13);
+
+  a += b;
+  std::cout << "Result: " << a << std::endl;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
