@@ -1798,9 +1798,70 @@ int main() {
 TODO: Add
 
 ## Операторы побитового сдвига
+```
+class BigInt {
+private:
+  int a;
 
+  friend std::ostream& operator<<(std::ostream& out, const BigInt& x);
 
+public:
+  explicit BigInt(int a): a(a) {}
+};
 
+std::ostream& operator<<(std::ostream& out, const BigInt& x) {
+  return out << x.a;
+}
+
+int main() {
+  BigInt a(15);
+
+  std::cout << a << std::endl;
+}
+```
+
+## Остальные операторы
+TODO: Add
+
+## increment/decrement
+```
+class BigInt {
+private:
+  int a;
+
+  friend std::ostream& operator<<(std::ostream& out, const BigInt& x);
+
+public:
+  explicit BigInt(int a): a(a) {}
+
+  // prefix
+  BigInt& operator++() {
+    ++a;
+    return *this;
+  }
+
+  // postfix
+  BigInt operator++(int) {
+    const BigInt copy = *this;
+    ++a;
+    return copy;
+  }
+};
+
+std::ostream& operator<<(std::ostream& out, const BigInt& x) {
+  return out << x.a;
+}
+
+int main() {
+  BigInt a(15);
+
+  std::cout << ++a << std::endl;
+  std::cout << a++ << std::endl;
+  std::cout << a << std::endl;
+}
+```
+
+## Константные и неконстантные методы
 
 
 
