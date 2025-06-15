@@ -1869,18 +1869,64 @@ private:
   int* arr = nullptr;
 
 public:
-  ArrayWrapper(size_t n): arr(new int[n], sz(n)) {
-    memset(str, c, sz);
+  ArrayWrapper(size_t n, const int a): arr(new int[n]), sz(n) {
+    std::fill_n(arr, sz, a);
   }
 
   size_t size() const {
     return sz;
   }
+
+  void print() const {
+    for (size_t i = 0; i < sz; i++) {
+      std::cout << arr[i] << " ";
+    }
+
+    std::cout << std::endl;
+  }
 };
 
+int main() {
+  const ArrayWrapper a(15, 4);
 
+  a.print();
+}
 ```
 
+### Что делают константные функции
+В константных функциях полям присваивается `const`. Но есть один минус, `int* const arr` – это константный указатель, и можно изменить какой-нибудь элемент.
+
+Как выглядит `ArrayWrapper` для константной функции:
+```
+class ArrayWrapper {
+private:
+  size_t sz = 0;
+  int* arr = nullptr;
+};
+```
+
+Пример того, как можно изменить элемент массива в константной функции:
+```
+class ArrayWrapper {
+private:
+  size_t sz = 0;
+  int* arr = nullptr;
+
+public:
+  void print() const {
+    arr[2] = 23; // OK
+    sz += 1; // Error
+
+    for (size_t i = 0; i < sz; i++) {
+      std::cout << arr[i] << " ";
+    }
+
+    std::cout << std::endl;
+  }
+};
+```
+
+## `mutable` поля
 
 
 
