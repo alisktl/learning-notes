@@ -1758,10 +1758,46 @@ int main() {
 }
 ```
 
+## Операторы сравнения: 0:15:20
+```
+class BigInt {
+private:
+  int a;
 
+public:
+  explicit BigInt(int a): a(a) {}
 
+  bool operator<(const BigInt &other) const {
+    return a < other.a;
+  }
 
+  bool operator>(const BigInt &other) const {
+    return a > other.a;
+  }
 
+  friend std::ostream &operator<<(std::ostream &os, const BigInt &obj) {
+    return os << obj.a;
+  }
+};
+
+int main() {
+  BigInt a(15);
+  BigInt b(13);
+
+  if (a < b) {
+    std::cout << a << " < " << b << std::endl;
+  }
+
+  if (a > b) {
+    std::cout << a << " > " << b << std::endl;
+  }
+}
+```
+
+## Spaceship operator
+TODO: Add
+
+## Операторы побитового сдвига
 
 
 
