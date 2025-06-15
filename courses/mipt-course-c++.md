@@ -1862,7 +1862,24 @@ int main() {
 ```
 
 ## Константные и неконстантные методы
+```
+class ArrayWrapper {
+private:
+  size_t sz = 0;
+  int* arr = nullptr;
 
+public:
+  ArrayWrapper(size_t n): arr(new int[n], sz(n)) {
+    memset(str, c, sz);
+  }
+
+  size_t size() const {
+    return sz;
+  }
+};
+
+
+```
 
 
 
