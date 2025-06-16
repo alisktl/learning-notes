@@ -1937,6 +1937,31 @@ private:
 };
 ```
 
+## Статические поля
+```
+struct {
+  static int x;
+};
+
+int main() {
+  S::x = 5;
+}
+```
+
+## Статические методы
+```
+struct {
+  static void f();
+};
+
+int main() {
+  S::f();
+}
+```
+
+## Пример: `Singleton`
+
+
 
 
 
