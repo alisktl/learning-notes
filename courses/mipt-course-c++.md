@@ -9,6 +9,7 @@
 7. [Приведения типов. Классы и структуры. Модификаторы доступа](#приведения-типов-классы-и-структуры-модификаторы-доступа)
 8. [Конструкторы, деструкторы, оператор присваивания и "правило трех"](#конструкторы-деструкторы-оператор-присваивания-и-правило-трех)
 9. [Перегрузка операторов, константные и статические методы](#перегрузка-операторов-константные-и-статические-методы)
+10. [Перегрузка операторов, константные и статические методы](#explicit-keyword)
 
 ---
 
@@ -1960,12 +1961,81 @@ int main() {
 ```
 
 ## Пример: `Singleton`
+```
+class C {
+  static C* obj;
+  C() {}
 
+public:
+  static C& GetObject() {
+    if (obj) return *obj;
+    obj = new C();
+    return *obj;
+  }
+  static void destroy() {
+    delete obj;
+  }
+};
 
+C* C::obj = nullptr;
 
+int main() {
+  C c = C::GetObject();
+}
+```
 
+## Custom type conversions
+```
+class BigInt {
+  int a;
 
+public:
+  BigInt(int a): a(a) {}
 
+  operator int() const {
+    return a;
+  }
+}
+
+int main() {
+  int a = 123;
+
+  // cast to BigInt
+  BigInt b = static_cast<BigInt>(a);
+
+  // cast to int
+  int c = static_cast<int>(a);
+  std::cout << c << std::endl;
+}
+```
+
+## `explicit` keyword
+Явно вызывать оператор или контсруктор.
+```
+class BigInt {
+  int a;
+
+public:
+  explicit BigInt(int a): a(a) {}
+
+  explicit operator int() const {
+    return a;
+  }
+}
+
+int main() {
+  int a = 123;
+
+  // cast to BigInt
+  BigInt b = static_cast<BigInt>(a);
+
+  // cast to int
+  int c = static_cast<int>(a);
+  std::cout << c << std::endl;
+}
+```
+
+---
 
 
 
