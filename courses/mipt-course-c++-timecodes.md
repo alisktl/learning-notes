@@ -30,6 +30,9 @@
 - Поменять тип хранения Enum: 0:28:00
 - Наследование: 0:34:30
 - private & public inheritance: 0:42:00
+- protected поля: 0:51:50
+- protected inheritance: 0:52:50
+- friend in inheritance: 1:03:00
 - 
 
 
