@@ -33,7 +33,8 @@
 - protected поля: 0:51:50
 - protected inheritance: 0:52:50
 - friend in inheritance: 1:03:00
-- 
+- Visibility and accessibility of fields and methods with inheritance: 1:11:30
+- Наследование конструктора: 1:24:40
 
 
 
