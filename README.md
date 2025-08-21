@@ -11,3 +11,4 @@ Notes from books and articles I've read.
 
 ## Courses
 * [С++ ФПМИ лекции - основной поток](./courses/mipt-course-c++.md)
+* [React courses](https://github.com/alisktl/learning-notes/blob/main/courses/react-beginner-course.md)
