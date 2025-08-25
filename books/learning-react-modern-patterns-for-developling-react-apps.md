@@ -74,9 +74,48 @@ template:
 console.log(`${lastName}, ${firstName} ${middleName}`);
 ```
 
+## Creating Functions
+### Function Declarations
+```
+function logCompliment() {
+  console.log("You're doing great!");
+}
 
+logCompliment();
+```
 
+### Function Expressions
+```
+const logCompliment = function() {
+    console.log("You're doing great!");
+};
 
+logCompliment();
+```
+
+works:
+```
+// Invoking the function before it's declared
+hey();
+
+// Function Declaration
+function hey() {
+  alert("hey!");
+}
+```
+
+does not work:
+```
+// Invoking the function before it's declared
+hey();
+
+// Function Expression
+const hey = function() {
+  alert("hey!");
+};
+```
+
+### Passing Arguments
 
 
 
