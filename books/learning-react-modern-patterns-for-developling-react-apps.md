@@ -1,5 +1,18 @@
 # Learning React - Modern Patterns for Developling React Apps
 
+- Chapter 2. JavaScript for React
+  - Declaring Variables
+    - The `const` Keyword
+    - The `let` Keyword
+    - Template Strings
+  - Creating Functions
+    - Function Declarations
+    - Function Expressions
+    - Passing Arguments
+    - Function Returns
+
+---
+
 # Chapter 2. JavaScript for React
 ## Declaring Variables
 ### The `const` Keyword
