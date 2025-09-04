@@ -8,8 +8,11 @@
   - Creating Functions
     - Function Declarations
     - Function Expressions
-    - Passing Arguments
-    - Function Returns
+    - Default Parameters
+    - Arrow Functions
+  - Compiling JavaScript
+  - Objects and Arrays
+    - Destructuring Objects
 
 ---
 
