@@ -128,7 +128,7 @@ const hey = function() {
 };
 ```
 
-### Passing Arguments
+#### Passing Arguments
 ```
 const logCompliment = function(firstName, message) {
   console.log(`${firstName}: ${message}`);
@@ -137,7 +137,143 @@ const logCompliment = function(firstName, message) {
 logCompliment("Molly", "You're so cool");
 ```
 
-### Function Returns
+#### Function Returns
+```
+const createCompliment = function(firstName, message) {
+    return `${firstName}: ${message}`;
+};
+
+createCompliment("Molly", "You're cool");
+```
+
+### Default Parameters
+```
+function logActivity(name = "Shane McConkey", activity = "skiing") {
+    console.log(`${name} loves ${activity}`);
+}
+
+logActivity("Alisher");
+```
+
+Default arguments can be any type, not just strings:
+```
+const defaultPerson = {
+    name: {
+        first: "Shane",
+        last: "McConkey",
+    },
+    favActivity: "skiing"
+};
+
+function logActivity(person = defaultPerson) {
+    console.log(`${person.name.first} loves ${person.favActivity}`);
+}
+
+logActivity();
+```
+
+### Arrow Functions
+```
+const lordify = function(firstName) {
+    return `${firstName} of Canterbury`;
+};
+
+console.log(lordify("Dale"));
+```
+
+With an arrow, we can simplify the syntax tremendously:
+```
+const lordify = firstName => `${firstName} of Canterbury`;
+
+console.log(lordify("Dale"));
+```
+
+More than one argument:
+```
+const lordify = (firstName, land) => `${firstName} of ${land}`;
+
+console.log(lordify("Dale", "Canterbury"));
+```
+
+If there are multiple lines, you'll use curly braces:
+```
+const lordify = (firstName, land) => {
+    if(!firstName) {
+        throw new Error("A firstName is required to lordify");
+    }
+
+    if(!land) {
+        throw new Error("A lord must have a land");
+    }
+
+    return `${firstName} of ${land}`;
+};
+
+console.log(lordify("Kelly"));
+console.log(lordify("Kelly", "Sonoma"));
+```
+
+#### Returning Objects
+```
+const person = (firstName, lastName) => ({
+    first: firstName,
+    last: lastName
+});
+
+console.log(person("Flad", "Hanson"));
+```
+
+#### Arrow Functions and Scope
+```
+const tahoe = {
+    mountains: ["Freel", "Rose", "Tallac", "Rubicon", "Silver"],
+    print: function(delay = 1000) {
+        setTimeout(() => {
+            console.log(this.mountains.join(", "));
+        }, delay);
+    }
+};
+
+tahoe.print();
+```
+
+Does not work:
+```
+const tahoe = {
+    mountains: ["Freel", "Rose", "Tallac", "Rubicon", "Silver"],
+    print: (delay = 1000) => {
+        setTimeout(() => {
+            console.log(this.mountains.join(", "));
+        }, delay);
+    }
+};
+
+tahoe.print(); // throws error
+```
+
+and
+
+```
+const tahoe = {
+    mountains: ["Freel", "Rose", "Tallac", "Rubicon", "Silver"],
+    print: function(delay = 1000) {
+        setTimeout(function() {
+            console.log(this.mountains.join(", "));
+        }, delay);
+    }
+};
+
+tahoe.print();
+```
+
+
+
+
+
+
+
+
+
 
 
 
