@@ -269,6 +269,149 @@ const tahoe = {
 tahoe.print();
 ```
 
+## Objects and Arrays
+### Destructuring Objects
+```
+const sandwich = {
+    bread: "dutch crunch",
+    meat: "tuna",
+    cheese: "swiss",
+    toppings: ["lettuce", "tomato", "mustard"]
+};
+
+const {bread, meat} = sandwich;
+console.log(bread, meat);
+```
+
+Do not change the original sandwich:
+```
+const sandwich = {
+    bread: "dutch crunch",
+    meat: "tuna",
+    cheese: "swiss",
+    toppings: ["lettuce", "tomato", "mustard"]
+};
+
+let { bread, meat } = sandwich;
+bread = "garlic";
+meat = "turkey";
+
+console.log(bread, meat);
+console.log(sandwich.bread, sandwich.meat);
+```
+
+We can also destructure incoming function arguments. Instead of:
+```
+const lordify = regularPerson => {
+    console.log(`${regularPerson.firstname} of Canterbury`);
+};
+
+const regularPerson = {
+    firstname: "Bill",
+    lastname: "Wilson"
+};
+
+lordify(regularPerson);
+```
+
+we may write:
+```
+const lordify = ({ firstname }) => {
+    console.log(`${firstname} of Canterbury`);
+};
+
+const regularPerson = {
+    firstname: "Bill",
+    lastname: "Wilson"
+};
+
+lordify(regularPerson);
+```
+
+another example:
+```
+const lordify = ({ spouse: { firstname } }) => {
+    console.log(`${firstname} of Canterbury`);
+};
+
+const regularPerson = {
+    firstname: "Bill",
+    lastname: "Wilson",
+    spouse: {
+        firstname: "Phil",
+        lastname: "wilson"
+    }
+};
+
+lordify(regularPerson);
+```
+
+### Destructuring Arrays
+```
+const [firstAnimal] = ["Horse", "Mouse", "Cat"];
+
+console.log(firstAnimal);
+```
+
+```
+const [, , thirdAnimal] = ["Horse", "Mouse", "Cat"];
+
+console.log(thirdAnimal);
+```
+
+### Object Literal Enhancement
+*Object Literal Enhancement* – is the opposite of destructuring.
+
+```
+const name = "Tallac";
+const elevation = 9738;
+
+const funHike = { name, elevation };
+
+console.log(funHike);
+```
+
+We can also create object methods with object literal enhancement or restructuring:
+```
+const name = "Tallac";
+const elevation = 9738;
+
+const print = function() {
+    console.log(`Mt. ${this.name} is ${this.elevation} feet tall`);
+};
+
+const funHike = { name, elevation, print };
+
+funHike.print();
+```
+
+### The Spread Operator
+```
+const peaks = ["Tallac", "Ralston", "Rose"];
+const canyons = ["Ward", "Blackwood"];
+const tahoe = [...peaks, ...canyons];
+
+console.log(tahoe.join(", "));
+```
+
+Reverse original array & last element:
+```
+const peaks = ["Tallac", "Ralston", "Rose"];
+const [last] = peaks.reverse();
+
+console.log(last);
+console.log(peaks.join(", "));
+```
+
+Do not reverse the original array & last element:
+```
+const peaks = ["Tallac", "Ralston", "Rose"];
+const [last] = [...peaks].reverse();
+
+console.log(last);
+console.log(peaks.join(", "));
+```
+
 
 
 
