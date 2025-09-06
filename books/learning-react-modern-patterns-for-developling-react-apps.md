@@ -453,7 +453,21 @@ console.log(backpackingMeals);
 ```
 
 ## Asynchronous JavaScript
+### Simple Promises with Fetch
+```
+fetch('https://api.randomuser.me/?nat=US&results=1').then(res =>
+    console.log(res.json())
+);
+```
 
+We can chain together `then` functions to handle a promise that has been successfully resolved:
+```
+fetch('https://api.randomuser.me/?nat=US&results=1')
+    .then(res => res.json())
+    .then(json => json.results)
+    .then(console.log)
+    .catch(console.error);
+```
 
 
 
