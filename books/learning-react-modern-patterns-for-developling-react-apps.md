@@ -469,7 +469,105 @@ fetch('https://api.randomuser.me/?nat=US&results=1')
     .catch(console.error);
 ```
 
+### Async/Await
+```
+const getFakePerson = async () => {
+    let res = await fetch('https://api.randomuser.me/?nat=US&results=1');
+    let { results } = res.json();
+    console.log(results);
+};
 
+getFakePerson();
+```
+
+Almost the same task:
+```
+const getFakePerson = async () => {
+    try {
+        let res = await fetch("https://api.randomuser.me/?nat=US&results=1");
+        let { results } = res.json();
+        console.log(results);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+getFakePerson();
+```
+
+### Building Promises
+```
+const getPeople = count =>
+    new Promise((resolves, rejects) => {
+        const api = `https://api.randomuser.me/?nat=US&results=${count}`;
+        const request = new XMLHttpRequest();
+        request.open("GET", api);
+        request.onload = () =>
+            request.status === 200
+                ? resolves(JSON.parse(request.response).results)
+                : reject(Error(request.statusText));
+        request.onerror = err => rejects(err);
+        request.send();
+    });
+
+getPeople(5)
+    .then(members => console.log(members))
+    .catch(error => console.error(`getPeople failed: ${error.message}`));
+```
+
+## Classes
+```
+function Vacation(destination, length) {
+    this.destination = destination;
+    this.length = length;
+}
+
+Vacation.prototype.print = function() {
+    console.log(this.destination + " | " + this.length + " days");
+};
+
+const maui = new Vacation("Maui", 7);
+maui.print();
+```
+
+Using `class`:
+```
+class Vacation {
+    constructor(destination, length) {
+        this.destination = destination;
+        this.length = length;
+    }
+
+    print() {
+        console.log(`${this.destination} will take ${this.length} days.`);
+    }
+}
+
+const trip = new Vacation("Santiago, Chile", 7);
+trip.print();
+```
+
+Inheritance:
+```
+class Expedition extends Vacation {
+    constructor(destination, length, gear) {
+        super(destination, length);
+        this.gear = gear;
+    }
+
+    print() {
+        super.print();
+        console.log(`Bring your ${this.gear.join(" and your ")}`);
+    }
+}
+
+const trip = new Expedition("Mt. Whitney", 3, [
+    "sunglasses",
+    "prayer flags",
+    "camera"
+]);
+trip.print();
+```
 
 
 
