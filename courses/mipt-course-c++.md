@@ -2038,10 +2038,90 @@ int main() {
 ---
 
 # Указатели на члены. Енумы. Наследование (начало)
-## Указатели на члены (поле)****
+## Указатели на члены (поле)
+```
+struct S {
+    int x;
+    double d;
 
+    void f(char c);
+};
 
+int main() {
+    int S::*p = &S::x;
 
+    S s{5, 3.0};
+    std::cout << sizeof(p) << ' ' << s.*p << std::endl;
+}
+```
+
+## Указатели на методы
+```
+struct S {
+    int x;
+    double d;
+
+    int f(char c) {
+        return c - 'a';
+    };
+};
+
+int main() {
+    int (S::*pf)(char) = &S::f;
+
+    S s{5, 3.0};
+    std::cout << sizeof(pf) << ' ' << (s.*pf)('c') << std::endl;
+}
+```
+
+Вызывать указатель на метод указателя на объект:
+```
+int main() {
+    int (S::*pf)(char) = &S::f;
+
+    S s{5, 3.0};
+    S *ps = &s;
+
+    std::cout << sizeof(pf) << ' ' << (ps->*pf)('c') << std::endl;
+}
+```
+
+## Enum
+```
+enum class TaxiClass {
+    ECONOM,
+    COMFORT,
+    COMFORT_PLUS,
+    BUSINESS
+};
+
+int main() {
+    TaxiClass taxi_comfort_class = TaxiClass::COMFORT;
+    TaxiClass taxi_business_class = TaxiClass::BUSINESS;
+
+    std::cout << static_cast<int>(taxi_comfort_class) << ' ' << static_cast<int>(taxi_business_class) << std::endl;
+}
+```
+
+Можно так:
+```
+enum class TaxiClass {
+    ECONOM = 1,
+    COMFORT = 2,
+    COMFORT_PLUS = 3,
+    BUSINESS = 4
+};
+```
+
+и так:
+```
+enum class TaxiClass:int16_t {
+    ECONOM = 1,
+    COMFORT = 2,
+    COMFORT_PLUS = 3,
+    BUSINESS = 4
+};
+```
 
 
 
