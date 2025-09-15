@@ -2125,6 +2125,208 @@ enum class TaxiClass:int16_t {
 };
 ```
 
+## Наследование
+### public inheritance
+```
+struct Base {
+    int x = 1;
+
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : Base {
+    int y = 2;
+
+    void g() {
+        std::cout << "g()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d;
+    d.f();
+    d.g();
+
+    std::cout << sizeof(d) << std::endl;
+}
+
+```
+
+или
+```
+struct Derived : Base
+```
+
+### private inheritance
+Does not work:
+```
+struct Base {
+    int x = 1;
+
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : private Base {
+    int y = 2;
+
+    void g() {
+        std::cout << "g()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d;
+    d.f();
+    d.g();
+
+    std::cout << sizeof(d) << std::endl;
+}
+```
+
+This works:
+```
+struct Base {
+    int x = 1;
+
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : private Base {
+    int y = 2;
+
+    void g() {
+        f();
+    }
+};
+
+int main() {
+    Derived d;
+    d.g();
+
+    std::cout << sizeof(d) << std::endl;
+}
+```
+
+These are the same:
+```
+struct Derived : private Base
+class Derived : Base
+```
+
+### protected inheritance
+`protected` поля и методы доступны только наследникам но не внешним функциям.
+
+`protected` наследование:
+```
+struct Derived : protected Base {
+    int y = 2;
+
+    void g() {
+        f();
+    }
+};
+```
+
+Does not work:
+```
+struct Base {
+    int x = 1;
+
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : private Base {
+    int y = 2;
+
+    void g() {
+        f();
+    }
+};
+
+struct Subderived : public Derived {
+    int z = 3;
+
+    void h() {
+        f();
+    }
+};
+```
+
+Does work:
+```
+struct Base {
+    int x = 1;
+
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : protected Base {
+    int y = 2;
+
+    void g() {
+        f();
+    }
+};
+
+struct Subderived : public Derived {
+    int z = 3;
+
+    void h() {
+        f();
+    }
+};
+
+int main() {
+    Subderived d;
+    d.h();
+
+    std::cout << sizeof(d) << std::endl;
+}
+```
+
+### `friend` in inheritance
+Does work:
+```
+struct Base {
+    int x = 1;
+
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : private Base {
+    int y = 2;
+
+    void g() {
+        f();
+    }
+
+    friend struct Subderived;
+};
+
+struct Subderived : public Derived {
+    int z = 3;
+
+    void h() {
+        f();
+    }
+};
+```
+
+`friend` не наследуется.
+
+
 
 
 
