@@ -2326,12 +2326,126 @@ struct Subderived : public Derived {
 
 `friend` не наследуется.
 
+### Visibility and Accessibility of fields and methods
+#### Видимость
+Здесь f() из Derived затмевает f() Base
+```
+struct Base {
+    int x = 1;
 
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
 
+struct Derived : public Base {
+    int y = 2;
 
+    void f() {
+        std::cout << "f2()" << std::endl;
+    }
+};
 
+int main() {
+    Derived d;
+    d.f();
+    d.Base::f();
 
+    std::cout << sizeof(d) << std::endl;
+}
+```
 
+#### Доступность
+Здесь нет доступности `Base::f()` из вне:
+```
+struct Base {
+    int x = 1;
+
+private:
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    int y = 2;
+
+    void f() {
+        std::cout << "f2()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d;
+    d.f();
+    d.Base::f(); // does not have access
+
+    std::cout << sizeof(d) << std::endl;
+}
+```
+
+Здесь мы дали доступ к `f()` в из вне:
+```
+struct Base {
+    int x = 1;
+
+protected:
+    void f() {
+        std::cout << "f()" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    int y = 2;
+
+    using Base::f;
+
+    void f(int) {
+        std::cout << "f2()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d;
+    d.f();
+    d.f(23);
+
+    std::cout << sizeof(d) << std::endl;
+}
+```
+
+### Наследование конструктора
+```
+struct Base {
+    int x = 1;
+
+    void f() {
+        std::cout << x << std::endl;
+    }
+
+    Base(int x) : x(x) {}
+};
+
+struct Derived : public Base {
+    using Base::Base;
+    int y = 2;
+
+    void f(int) {
+        std::cout << "f2()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d = 5;
+    d.Base::f();
+
+    std::cout << sizeof(d) << std::endl;
+}
+```
+
+---
+
+# Наследование и приведения типов. Множественное наследование
 
 
 
