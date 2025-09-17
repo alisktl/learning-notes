@@ -36,7 +36,15 @@
 - Visibility and accessibility of fields and methods with inheritance: 1:11:30
 - Наследование конструктора: 1:24:40
 
+---
 
+## 12. Наследование и приведения типов. Множественное наследование
+- Memory layout and constructors/destructors calls order: 0:00:50
+- Inheritance and Type Conversion: 0:19:00
+- Multiple Inheritance: 0:52:00
+- Проблема ромбовидного наследования (Diamond Problem): 1:02:00
+- Inaccessible base class: 1:12:00
+- Virtual Inheritance: 1:14:00
 
 
 
