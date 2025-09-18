@@ -3032,6 +3032,8 @@ int main() {
 ### Специализация шаблонных функций
 **TODO:** add
 
+## Non-type template parameters
+**TODO:** add
 
 
 
