@@ -2743,16 +2743,294 @@ int main() {
 }
 ```
 
+# Шаблоны. Перегрузка и специализация шаблонов
+## General idea of templates
+```
+template<typename T>
+void swap(T &x, T &y) {
+    T temp = x;
+    x = y;
+    y = temp;
+}
+
+template<typename T, typename U>
+void f(T &x, U &y) {
+    std::cout << x << ' ' << y << std::endl;
+}
+
+int main() {
+    int x = 1, y = 2;
+    swap(x, y);
+    std::cout << x << " " << y << std::endl;
+
+    double a = 8.8, b = 12.5;
+    swap(a, b);
+    std::cout << a << " " << b << std::endl;
+
+    f(x, a);
+}
+```
+
+## Шаблон класса
+```
+template<typename T>
+class vector {
+private:
+    T *arr;
+    int sz;
+    int cap;
+};
+```
+
+Можно определить шаблонный метод в классе (не обязательно шаблонном):
+```
+template<typename T>
+class vector {
+private:
+    T *arr;
+    int sz;
+    int cap;
+
+public:
+    template<typename U>
+    void push_back(const U &x) {
+    };
+};
+```
+
+Можно определить шаблонный метод вне класса:
+```
+template<typename T>
+class vector {
+private:
+    T *arr;
+    int sz;
+    int cap;
+
+public:
+    template<typename U>
+    void push_back(const U &x);
+};
+
+template<typename T>
+template<typename U>
+void vector<T>::push_back(const U &x) {
+}
+```
+
+## Шаблонные using
+```
+// since c++11
+template<typename T>
+using vi = std::vector<T>;
+
+template<typename T>
+using mymap = std::map<T, T>;
+
+int main() {
+    vi<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    for (auto i : v) {
+        std::cout << i << std::endl;
+    }
+}
+```
+
+## Шаблонные переменные
+```
+template<typename T>
+struct MyClass {
+    static const int value = 42;
+};
+
+template<>
+struct MyClass<int> {
+    static const int value = 100;
+};
+
+int main() {
+    int v1 = MyClass<double>::value; // Шаблонные переменные
+    int v2 = MyClass<int>::value; // Шаблонные переменные
+
+    std::cout << "v1 = " << v1 << std::endl;
+    std::cout << "v2 = " << v2 << std::endl;
+}
+```
+
+## Overloading of template functions
+### Если есть возможность не делать привидение типов, то так и делать:
+```
+template<typename T>
+void f(T) {
+    std::cout << 1 << std::endl;
+}
+
+void f(int) {
+    std::cout << 2 << std::endl;
+}
+
+int main() {
+    f(10L);
+    f(10);
+}
+```
+
+### В этом случае выберется шаблонная версия
+```
+template<typename T>
+void f(T) {
+    std::cout << 1 << std::endl;
+}
+
+void f(int) {
+    std::cout << 2 << std::endl;
+}
+
+int main() {
+    f<int>(10);
+}
+```
+
+### Когда компилятор не может выбрать без параметризации
+```
+template<typename T>
+T f(int) {
+    std::cout << 2 << std::endl;
+    return T();
+}
+
+int main() {
+    f(10); // CE
+    f<int>(10);
+}
+```
+
+### Аргументы шаблонов по умолчанию
+```
+template<typename T = int>
+T f(int) {
+    std::cout << 2 << std::endl;
+    return T();
+}
+
+int main() {
+    f(10);
+}
+```
+
+### Несколько шаблонов
+```
+template<typename T, typename U>
+void f(T t, U u) {
+    std::cout << 2 << std::endl;
+}
+
+int main() {
+    f(10, 10.0);
+    f<double>(10, 10.0);
+    f<double, double>(10, 10.0);
+}
+```
+
+## Специализация шаблонов
+```
+template<typename T>
+struct S {
+    void f() {
+        std::cout << 1 << std::endl;
+    }
+};
+
+template<>
+struct S<int> {
+    void f() {
+        std::cout << 2 << std::endl;
+    }
+};
+
+int main() {
+    S<int> s;
+    s.f();
+}
+```
+
+Пример Специализация шаблонов: vector<bool>
+
+### Full vs Partial Specialization
+variant 1:
+```
+template<typename T, typename U>
+struct S {
+    void f() {
+        std::cout << 1 << std::endl;
+    }
+};
+
+template<typename T>
+struct S<T, T> {
+    void f() {
+        std::cout << 2 << std::endl;
+    }
+};
+
+int main() {
+    S<double, double> s;
+    S<double, int> ss;
+    s.f();
+    ss.f();
+}
+```
+
+variant 2:
+```
+template<typename T>
+struct S {
+    void f() {
+        std::cout << 1 << std::endl;
+    }
+};
+
+template<typename T>
+struct S<T &> {
+    void f() {
+        std::cout << 2 << std::endl;
+    }
+};
+
+int main() {
+    S<double &> s;
+    S<int> ss;
+    s.f();
+    ss.f();
+}
+```
+
+variant 3:
+```
+template<typename T>
+struct S {
+    void f() {
+        std::cout << 1 << std::endl;
+    }
+};
+
+template<typename T>
+struct S<const T&> {
+    void f() {
+        std::cout << 2 << std::endl;
+    }
+};
+
+int main() {
+    S<double &> s;
+    S<const int&> ss;
+    s.f();
+    ss.f();
+}
+```
 
 
-
-
-
-
-
-
-
-
+### Специализация шаблонных функций
+**TODO:** add
 
 
 
