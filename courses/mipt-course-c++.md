@@ -2446,6 +2446,328 @@ int main() {
 ---
 
 # Наследование и приведения типов. Множественное наследование
+## Как хранится объект при наследовании
+```
+struct Base {
+    int x = 1;
+    int y = 2;
+};
+
+struct Derived : public Base {
+    int z = 3;
+};
+```
+
+В памяти:
+```
+|x|y|z|
+```
+
+## Memory layout and constructors/destructors calls order
+```
+struct A {
+    int k;
+
+    A(int k) : k(k) {
+        std::cout << "A called" << std::endl;
+    }
+
+    ~A() {
+        std::cout << "~A called" << std::endl;
+    }
+};
+
+struct Base {
+    int x;
+    int y;
+
+    Base(int x, int y) : x(x), y(y) {
+        std::cout << "Base called" << std::endl;
+    }
+
+    ~Base() {
+        std::cout << "~Base called" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    A a;
+    int z;
+
+    Derived(int x, int y, A a, int z) : Base(x, y), a(a), z(z) {
+        std::cout << "Derived called" << std::endl;
+    }
+
+    ~Derived() {
+        std::cout << "~Derived called" << std::endl;
+    }
+};
+
+int main() {
+    Derived d(1, 2, 3, 4);
+    std::cout << sizeof(d) << std::endl;
+}
+```
+
+The order of calls:
+```
+A called
+Base called
+Derived called
+~A called
+16
+~Derived called
+~A called
+~Base called
+```
+
+## Inheritance and Type Conversion
+### Object Slicing
+```
+struct Base {
+    int x;
+    int y;
+
+    Base(int x, int y) : x(x), y(y) {
+    }
+};
+
+struct Derived : public Base {
+    int z;
+
+    Derived(int x, int y, int z) : Base(x, y), z(z) {
+    }
+};
+
+int main() {
+    Derived d(1, 2, 3);
+
+    // object slicing
+    Base b = static_cast<Base>(d);
+    Base b_2 = static_cast<Base &>(d);
+
+    // Not object slicing
+    Base &b_3 = static_cast<Base &>(d);
+
+    // Undefined Behavior
+    Derived &d_2 = static_cast<Derived &>(b);
+    Derived d_3 = static_cast<Derived &>(b);
+
+    std::cout << sizeof(b) << ", x: " << b.x << ", y: " << b.y << std::endl;
+    std::cout << sizeof(b_2) << ", x: " << b_2.x << ", y: " << b_2.y << std::endl;
+    std::cout << sizeof(d_2) << ", x: " << d_2.x << ", y: " << d_2.y << ", z: " << d_2.z << std::endl;
+
+    std::cout << &d << std::endl;
+    std::cout << &b << std::endl;
+    std::cout << &b_2 << std::endl;
+    std::cout << &d_2 << std::endl;
+    std::cout << &d_3 << std::endl;
+}
+```
+
+### Передача объекта в функцию как родитель
+```
+struct Base {
+    int x;
+    int y;
+
+    Base(int x, int y) : x(x), y(y) {
+    }
+};
+
+struct Derived : public Base {
+    int z;
+
+    Derived(int x, int y, int z) : Base(x, y), z(z) {
+    }
+};
+
+void print_1(Base b) {
+    std::cout << b.x << " " << b.y << std::endl;
+}
+
+void print_2(Base &b) {
+    std::cout << b.x << " " << b.y << std::endl;
+}
+
+int main() {
+    Derived d(1, 2, 3);
+
+    print_1(static_cast<Base>(d));
+    print_2(d);
+}
+```
+
+## Multiple Inheritance
+```
+struct Mother {
+    int x;
+
+    Mother(int x) : x(x) {
+    }
+};
+
+struct Father {
+    int y;
+
+    Father(int y) : y(y) {
+    }
+};
+
+struct Son : public Mother, public Father {
+    int z;
+
+    Son(const int x, const int y, const int z): Mother{x}, Father{y}, z(z) {
+    }
+};
+
+int main() {
+    Son s(1, 2, 3);
+
+    std::cout << s.x << ' ' << s.y << ' ' << s.z << std::endl;
+}
+```
+
+## Diamond Problem [Проблема ромбовидного наследования]
+```
+struct Granny {
+    int w;
+
+    Granny(const int w) : w(w) {
+    }
+};
+
+struct Mother : public Granny {
+    int x;
+
+    Mother(const int w, const int x) : Granny{w}, x(x) {
+    }
+};
+
+struct Father : public Granny {
+    int y;
+
+    Father(const int w, const int y) : Granny{w}, y(y) {
+    }
+};
+
+struct Son : public Mother, public Father {
+    int z;
+
+    Son(const int w1, const int w2, const int x, const int y, const int z): Mother{w1, x}, Father{w2, y}, z(z) {
+    }
+};
+
+int main() {
+    Son s(1, 11, 2, 3, 4);
+
+    std::cout << s.w << std::endl; // CE
+    std::cout << s.x << ' ' << s.y << ' ' << s.z << std::endl;
+    std::cout << s.Mother::w << std::endl;
+    std::cout << s.Father::w << std::endl;
+}
+```
+
+## Inaccessible base class
+```
+struct Granny {
+    int w;
+
+    Granny(const int w) : w(w) {
+    }
+};
+
+struct Mother : public Granny {
+    int x;
+
+    Mother(const int w, const int x) : Granny{w}, x(x) {
+    }
+};
+
+struct Son : public Mother, public Granny {
+    int z;
+
+    Son(const int w1, const int w2, const int x, const int z): Mother{w1, x}, Granny{w2}, z(z) {
+    }
+};
+
+int main() {
+    Son s(1, 2, 3, 4);
+
+    std::cout << s.x << ' ' << s.z << std::endl;
+    std::cout << s.Mother::w << std::endl;
+    std::cout << s.w << std::endl; // CE, inaccessible
+}
+```
+
+## Virtual Inheritance
+```
+struct Granny {
+    int w;
+
+    Granny() : w(0) {
+    }
+
+    explicit Granny(const int w) : w(w) {
+    }
+};
+
+struct Mother : virtual public Granny {
+    int x;
+
+    explicit Mother(const int x) : x(x) {
+    }
+};
+
+struct Father : virtual public Granny {
+    int y;
+
+    explicit Father(const int y) : y(y) {
+    }
+};
+
+struct Son : public Mother, public Father {
+    int z;
+
+    Son(const int w, const int x, const int y, const int z): Granny{w}, Mother{x}, Father{y}, z(z) {
+    }
+};
+
+int main() {
+    Son s(1, 2, 3, 4);
+
+    std::cout << s.x << ' ' << s.y << ' ' << s.z << std::endl;
+    std::cout << s.Mother::w << std::endl;
+    std::cout << s.Father::w << std::endl;
+    std::cout << s.w << std::endl;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
