@@ -3115,6 +3115,30 @@ int main() {
 }
 ```
 
+Another example:
+```
+template<typename T>
+struct S {
+    template<typename K>
+    struct A {
+    };
+};
+
+template<>
+struct S<int> {
+    static const int A;
+};
+
+template<typename T, typename K>
+void f() {
+    typename S<T>::template A<K> a;
+}
+
+int main() {
+    f<long long, int>();
+}
+```
+
 ## Basic type traits
 
 
