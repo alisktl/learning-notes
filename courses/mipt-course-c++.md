@@ -3028,15 +3028,94 @@ int main() {
 }
 ```
 
-
 ### Специализация шаблонных функций
 **TODO:** add
 
 ## Non-type template parameters
 **TODO:** add
 
+# Вычисления с помощью шаблонов. Простейшие type traits
+## Basic template metaprogramming
+Template metaprogramming – вычисление в момент компиляции.
 
+### Вычисление числа Фибоначчи
+```
+template<int N>
+struct Fibonacci {
+    static const int value = Fibonacci<N - 1>::value + Fibonacci<N - 2>::value;
+};
 
+template<>
+struct Fibonacci<0> {
+    static const int value = 0;
+};
+
+template<>
+struct Fibonacci<1> {
+    static const int value = 1;
+};
+
+int main() {
+    std::cout << Fibonacci<30>::value << std::endl;
+}
+```
+
+### Вычисление простоты числа
+```
+template<int N, int D>
+struct is_divisible {
+    static const bool value = (N % D == 0) || is_divisible<N, D - 1>::value;
+};
+
+template<int N>
+struct is_divisible<N, 2> {
+    static const bool value = (N % 2 == 0);
+};
+
+template<int N>
+struct is_prime {
+    static const bool value = (N > 1) && !is_divisible<N, N - 1>::value;
+};
+
+template<> struct is_prime<0> { static const bool value = false; };
+template<> struct is_prime<1> { static const bool value = false; };
+template<> struct is_prime<2> { static const bool value = true; };
+
+int main() {
+    std::cout << "Is 2 prime? " << is_prime<2>::value << "\n";
+    std::cout << "Is 17 prime? " << is_prime<17>::value << "\n";
+    std::cout << "Is 20 prime? " << is_prime<20>::value << "\n";
+}
+```
+
+## Зависимые имена в шаблонах [Dependent names in templates]
+```
+template<typename T>
+struct S {
+    static const int x = 3;
+};
+
+template<>
+struct S<int> {
+    using x = int;
+};
+
+int a = 2;
+
+template<typename T>
+void f(T y) {
+    typename S<T>::x *a;
+}
+
+int main() {
+    f<int>(23);
+    //f<double>(23.0); // CE
+
+    std::cout << S<double>::x << std::endl;
+}
+```
+
+## Basic type traits
 
 
 
