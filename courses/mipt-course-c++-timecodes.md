@@ -60,7 +60,12 @@
 - Специализация шаблонных функций: 1:09:30
 - Non-type template parameters: 1:16:00
 
+---
 
+## 14. Вычисления с помощью шаблонов. Простейшие type traits.
+- Basic template metaprogramming: 0:00:40
+- Зависимые имена в шаблонах [Dependent names in templates]: 0:28:40
+- Basic type traits: 0:56:30
 
 
 
