@@ -15,4 +15,81 @@ English Vocabulary in Use. Upper-Intermediate
 5. `a record` / `to record`
 6. `photograph` / `photographer` / `photographic`
 
+## 1.3. Phrases
+1. `a remarkable`
+  - `range`
+  - `likeness`
+  - `coincidence`
+2. `to coin`
+  - `new words`
+  - `a phrase`
+  - `a term`
+3. `a royal`
+  - `family`
+  - `palace`
+  - `welcome`
+4. `a subtle`
+  - `suggestion`
+  - `shade`
+  - `difference`
+
+## 1.4. `informal` and `formal` words
+1. `informal` words:
+  - `guys`
+  - `Awesome!`
+  - `to feel gutted`
+  - `to bug someone`
+  - `to zone out`
+2. `formal` words
+  - `a minor`
+  - `to alight (from a bus)`
+  - `a felon`
+
+## 1.5. Set of words
+1. `royalty`: `king`, `queen`, `prince`, `princess`, `duke`
+2. `shade`: `sunshade`, `shady`, `shadow`, `shade`, `to shadow`, `shadowy`, `lampshade`, `eye shadow`
+3. `expressing`: `articulate`, `communicate`, `convey`, `express`, `put across`, `say`, `state`
+4. parts of speech: `noun`, `verb`, `adjective`, `adverb`, `preposition`, `conjunction`
+5. words with a silent `b`: `subtle`, `comb`, `lamb`, `crumb`, `debt`, `plumber`, `dumb`, `limb`
+
+## 1.6. Draw a picture
+1. `screwdriver`
+2. `to drip`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
