@@ -16,31 +16,31 @@ English Vocabulary in Use. Upper-Intermediate
 6. `photograph` / `photographer` / `photographic`
 
 ## 1.3. Phrases
-1. `a remarkable`
+- `a remarkable`
   - `range`
   - `likeness`
   - `coincidence`
-2. `to coin`
+- `to coin`
   - `new words`
   - `a phrase`
   - `a term`
-3. `a royal`
+- `a royal`
   - `family`
   - `palace`
   - `welcome`
-4. `a subtle`
+- `a subtle`
   - `suggestion`
   - `shade`
   - `difference`
 
 ## 1.4. `informal` and `formal` words
-1. `informal` words:
+- `informal` words:
   - `guys`
   - `Awesome!`
   - `to feel gutted`
   - `to bug someone`
   - `to zone out`
-2. `formal` words
+- `formal` words
   - `a minor`
   - `to alight (from a bus)`
   - `a felon`
