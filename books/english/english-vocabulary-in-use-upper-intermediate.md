@@ -1,5 +1,7 @@
 English Vocabulary in Use. Upper-Intermediate
 
+1. [Learning Vocabulary](#1-learning-vocabulary)
+
 # 1. Learning Vocabulary
 ## 1.1.
 1. nouns only used in the plural: `scissors`, `trousers`, `clothes`, `tights`
