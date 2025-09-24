@@ -68,6 +68,18 @@
 - Basic type traits: 0:56:30
 - Variadic Templates: 1:18:00
 
+---
+
+## 15. Полиморфизм. Виртуальные функции. Оператор dynamic_cast
+- Polymorphism: introduction: 0:00:00
+- Virtual functions: 0:19:30
+
+
+
+
+
+
+
 
 
 
