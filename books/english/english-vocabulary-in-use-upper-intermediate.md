@@ -58,27 +58,79 @@ English Vocabulary in Use. Upper-Intermediate
 1. `screwdriver`
 2. `to drip`
 
+---
 
+# 2. Organising a vocabulary notebook
+## 2.1. Word topics
+- Working too much / too hard
+  - `stress`
+  - `exhaustion`
+  - `overwork`
+  - `burnt out`
+  - `snowed under with work`
+  - `be under pressure`
+- friendship
+  - `hang out with sb`
+  - `casual acquaintance`
+  - `be close to sb`
+  - `count on sb`
+- media
+  - `tabloid`
+  - `podcast`
+  - `upload a video`
+  - `blogosphere`
+  - `journalist`
+  - `blog`
 
+## 2.2. Organise words
+- nouns:
+  - `latecomer`
+  - `alarm clock`
+  - `nightmare`
+- verbs:
+  - `rush`
+  - `oversleep`
+  - `dash`
+  - `yawn`
+- adjectives:
+  - `breathless`
+  - `exhausted`
+- collocations:
+  - `set a clock`
+  - `deep sleep`
+  - `fast asleep`
+  - `heavy sleeper`
+- fixed phrases:
+  - `out of breath`
+  - `in a hurry`
 
+## 2.3. Synonym or Antonym
+- `pleased`, `glad`
+- `photos`, `shots`
+- `happy`, `dissatisfied`
+- `supplied with`, `deprived of`
+- `mild`, `spicy`
+- `cold`, `chilly`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 2.4. Word stress
+- `perfect`:
+  - noun: `perfection`
+  - verb: `perfect`
+  - adjective: `perfect`
+  - person: `perfectionist`
+- `inform`:
+  - noun: `information`
+  - verb: `inform`
+  - adjective: `informative`
+- `politics`:
+  - noun: `politics`
+  - adjective: `political`
+  - person: `politician`
+- `economics`:
+  - noun: `economics`
+  - verb: `economise`
+  - adjective: `economic` / `economical`
+  - person: `economist`
 
 
 
