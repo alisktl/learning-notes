@@ -1,6 +1,7 @@
 English Vocabulary in Use. Upper-Intermediate
 
 1. [Learning Vocabulary](#1-learning-vocabulary)
+2. [Organising a vocabulary notebook](#2-organising-a-vocabulary-notebook)
 
 # 1. Learning Vocabulary
 ## 1.1.
