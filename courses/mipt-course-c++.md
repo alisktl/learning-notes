@@ -3324,6 +3324,45 @@ int main() {
 }
 ```
 
+### With `const`
+```
+struct Base {
+    virtual void f() {
+        std::cout << "Base::f()" << std::endl;
+    }
+
+    virtual void f() const {
+        std::cout << "Base::f() const" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    void f() const {
+        std::cout << "Derived::f() const" << std::endl;
+    }
+};
+
+struct Subderived : public Derived {
+    void f() {
+        std::cout << "Subderived::f()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d;
+    Base &b = d;
+    b.f();
+
+    const Derived d2;
+    const Base &b2 = d2;
+    b2.f();
+
+    Subderived s;
+    Base &b3 = s;
+    b3.f();
+}
+```
+
 
 
 
