@@ -3269,7 +3269,60 @@ int main() {
 }
 ```
 
+---
 
+# Полиморфизм. Виртуальные функции. Оператор dynamic_cast
+## Introduction
+```
+struct Base {
+    void f() {
+        std::cout << "Base::f()" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    void f() {
+        std::cout << "Derived::f()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d;
+    Base &b = d;
+    b.f();
+}
+```
+
+## Virtual functions
+```
+struct Base {
+    virtual void f() {
+        std::cout << "Base::f()" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    void f() {
+        std::cout << "Derived::f()" << std::endl;
+    }
+};
+
+struct Subderived : public Derived {
+    void f() {
+        std::cout << "Subderived::f()" << std::endl;
+    }
+};
+
+int main() {
+    Derived d;
+    Base &b = d;
+    b.f();
+
+    Subderived s;
+    Base &bb = s;
+    bb.f();
+}
+```
 
 
 
