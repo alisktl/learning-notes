@@ -66,6 +66,7 @@
 - Basic template metaprogramming: 0:00:40
 - Зависимые имена в шаблонах [Dependent names in templates]: 0:28:40
 - Basic type traits: 0:56:30
+- Variadic Templates: 1:18:00
 
 
 
