@@ -3140,9 +3140,134 @@ int main() {
 ```
 
 ## Basic type traits
+### Пример: Проверка на совпадение типов
+```
+template<typename T, typename U>
+struct is_same {
+    static const bool value = false;
+};
 
+template<typename T>
+struct is_same<T, T> {
+    static const bool value = true;
+};
 
+int main() {
+    std::cout << is_same<int, int>::value << std::endl;
+    std::cout << is_same<int, double>::value << std::endl;
+}
+```
 
+### Пример: Удаление `const` с типа
+```
+template<typename T>
+struct remove_const {
+    using type = T;
+};
+
+template<typename T>
+struct remove_const<const T> {
+    using type = T;
+};
+
+int main() {
+    typename remove_const<const int>::type a = 12;
+    ++a;
+    std::cout << a << std::endl;
+}
+```
+
+### Использование шаблонного `using`, (*since C++14*)
+```
+template<typename T>
+struct remove_const {
+    using type = T;
+};
+
+template<typename T>
+struct remove_const<const T> {
+    using type = T;
+};
+
+template<typename T>
+using remove_const_t = typename remove_const<T>::type;
+
+int main() {
+    remove_const_t<const int> a = 12;
+    ++a;
+    std::cout << a << std::endl;
+}
+```
+
+### Пример: remove reference
+```
+template<typename T>
+struct remove_reference {
+    using type = T;
+};
+
+template<typename T>
+struct remove_reference<T &> {
+    using type = T;
+};
+
+template<typename T>
+using remove_reference_t = typename remove_reference<T>::type;
+
+int main() {
+    int a = 5;
+    remove_reference_t<int &> b = a;
+    ++b;
+    std::cout << a << " : " << b << std::endl;
+}
+```
+
+### Использование шаблонных переменных, (*since C++17*)
+```
+template<typename T, typename U>
+struct is_same {
+    static const bool value = false;
+};
+
+template<typename T>
+struct is_same<T, T> {
+    static const bool value = true;
+};
+
+template<typename T, typename U>
+const bool is_same_v = is_same<T, U>::value;
+
+int main() {
+    std::cout << is_same_v<int, int> << std::endl;
+    std::cout << is_same_v<int, double> << std::endl;
+}
+```
+
+[Список всех готовых type_traits](https://en.cppreference.com/w/cpp/header/type_traits.html)
+Пример использования готовой meta-функции:
+```
+int main() {
+    typename std::remove_const<const int>::type a = 12;
+    ++a;
+    std::cout << a << std::endl;
+}
+```
+
+## Variadic templates, (*since C++11*)
+```
+void print() {
+}
+
+template<typename T, typename... Args>
+void print(T t, Args... args) {
+    std::cout << t << ' ';
+    print(args...);
+}
+
+int main() {
+    print(1, 2, 3.0, "hello", ',', "world", '!');
+}
+```
 
 
 
