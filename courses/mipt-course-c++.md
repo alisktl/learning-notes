@@ -3498,6 +3498,8 @@ int main() {
 }
 ```
 
+## Abstract classes and pure virtual functions
+
 
 
 
