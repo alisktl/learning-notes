@@ -73,6 +73,8 @@
 ## 15. Полиморфизм. Виртуальные функции. Оператор dynamic_cast
 - Polymorphism: introduction: 0:00:00
 - Virtual functions: 0:19:30
+- Двух уровневое наследование: 0:42:50
+- Abstract classes and pure virtual functions: 0:48:00
 
 
 
