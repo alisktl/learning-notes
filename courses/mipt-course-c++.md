@@ -3363,8 +3363,140 @@ int main() {
 }
 ```
 
+### `override` keyword
+Ключевое слово `override` не добавляет никакой функциональности, но его надо добавлять для переопределения виртуальной функции:
+```
+struct Base {
+    virtual void f() {
+        std::cout << "Base::f()" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    void f() override {
+        std::cout << "Derived::f()" << std::endl;
+    }
+};
+
+struct Subderived : public Derived {
+    void f() override {
+        std::cout << "Subderived::f()" << std::endl;
+    }
+};
+
+int main() {
+    Subderived s;
+    Base &b = s;
+    b.f();
+}
+```
+
+### `final` keyword
+Ключевое слово `final` не позволяет переопределение виртуальной функции:
+```
+struct Base {
+    virtual void f() {
+        std::cout << "Base::f()" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+    void f() final {
+        std::cout << "Derived::f()" << std::endl;
+    }
+};
+
+struct Subderived : public Derived {
+    void f() {
+        std::cout << "Subderived::f()" << std::endl;
+    }
+};
+```
+
+### `private`
+`private` не всегда скрывает:
+```
+struct Base {
+    virtual void f() {
+        std::cout << "Base::f()" << std::endl;
+    }
+};
+
+struct Derived : public Base {
+private:
+    void f() override {
+        std::cout << "Derived::f()" << std::endl;
+    }
+};
 
 
+int main() {
+    Derived d;
+    Base &b = d;
+    b.f();
+}
+```
+
+### Двух уровневое наследование
+#### Example 1:
+```
+struct Mother {
+    virtual void f() {
+        std::cout << "Mother::f()" << std::endl;
+    }
+};
+
+struct Father {
+    void f() {
+        std::cout << "Father::f()" << std::endl;
+    }
+};
+
+struct Son : public Mother, public Father {
+    void f() {
+        std::cout << "Son::f()" << std::endl;
+    }
+};
+
+int main() {
+    Son s;
+    Mother &m = s;
+    Father &f = s;
+    s.f();
+    m.f();
+    f.f();
+}
+```
+
+#### Example 2:
+```
+struct Mother {
+    virtual void f() {
+        std::cout << "Mother::f()" << std::endl;
+    }
+};
+
+struct Father {
+    virtual void f() {
+        std::cout << "Father::f()" << std::endl;
+    }
+};
+
+struct Son : public Mother, public Father {
+    void f() {
+        std::cout << "Son::f()" << std::endl;
+    }
+};
+
+int main() {
+    Son s;
+    Mother &m = s;
+    Father &f = s;
+    s.f();
+    m.f();
+    f.f();
+}
+```
 
 
 
