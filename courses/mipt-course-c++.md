@@ -1,6 +1,6 @@
 # С++ ФПМИ лекции - основной поток
 
-[timcodes](https://github.com/alisktl/learning-notes/blob/main/courses/mipt-course-c%2B%2B-timecodes.md)
+[timecodes](https://github.com/alisktl/learning-notes/blob/main/courses/mipt-course-c%2B%2B-timecodes.md)
 
 1. [Основные типы и операции над ними.](#основные-типы-и-операции-над-ними)
 2. [Объявления, определения и области видимости. Выражения и операторы.](#объявления-определения-и-области-видимости-выражения-и-операторы)
