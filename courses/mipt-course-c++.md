@@ -3499,6 +3499,120 @@ int main() {
 ```
 
 ## Abstract classes and pure virtual functions
+```
+struct Mother {
+    // pure virtual function
+    virtual void f() = 0;
+};
+
+struct Son : public Mother {
+    void f() override {
+        std::cout << "Son::f()" << std::endl;
+    }
+};
+
+int main() {
+    Son s;
+    Mother &m = s;
+    s.f();
+    m.f();
+}
+```
+
+## Virtual destructor problem
+### Example 1:
+```
+struct Mother {
+    int *p;
+
+    Mother() : p(new int(1)) {
+    }
+
+    virtual void f() = 0;
+
+    virtual ~Mother() {
+        std::cout << "~Mother()" << std::endl;
+        delete p;
+    }
+};
+
+struct Son : public Mother {
+    int *p;
+
+    Son() : p(new int(2)) {
+    }
+
+    void f() override {
+        std::cout << "Son::f()" << std::endl;
+    }
+
+    ~Son() override {
+        std::cout << "~Son()" << std::endl;
+        delete p;
+    }
+};
+
+int main() {
+    Mother *m = new Son();
+    m->f();
+    delete m;
+}
+```
+
+### Example 2:
+```
+struct Mother {
+    virtual void f() = 0;
+
+    virtual ~Mother() = default;
+};
+
+struct Son : public Mother {
+    int *p;
+
+    Son() : p(new int(2)) {
+    }
+
+    void f() override {
+        std::cout << "Son::f()" << std::endl;
+    }
+
+    ~Son() override {
+        std::cout << "~Son()" << std::endl;
+        delete p;
+    }
+};
+
+int main() {
+    Mother *m = new Son();
+    m->f();
+    delete m;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
