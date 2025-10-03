@@ -76,7 +76,7 @@
 - Двух уровневое наследование: 0:42:50
 - Abstract classes and pure virtual functions: 0:48:00
 - Virtual destructor problem: 0:57:00
-- : 1:10:00
+- Runtime type conversions: 1:10:00
 
 
 
