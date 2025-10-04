@@ -3590,6 +3590,68 @@ int main() {
 }
 ```
 
+## Runtime type conversions
+### CE error
+Здесь `Compilation Error`, поскольку Base не полиморфичный. Чтобы он был полиморфичный, то надо добавить виртуальную функцию (можно destructor)
+```
+struct Base {
+};
+
+struct Derived : Base {
+};
+
+int main() {
+    Base b;
+    Derived d;
+    int x;
+    std::cin >> x;
+
+    Base &bb = x % 2 ? b : d;
+    dynamic_cast<Derived &>(bb);
+}
+```
+
+### Компилируется, но Runtime Error выходит при `x` - нечетна
+```
+struct Base {
+    virtual ~Base() {
+    }
+};
+
+struct Derived : Base {
+};
+
+int main() {
+    Base b;
+    Derived d;
+    int x;
+    std::cin >> x;
+
+    Base &bb = x % 2 ? b : d;
+    dynamic_cast<Derived &>(bb);
+}
+```
+
+### Works
+```
+struct Base {
+    virtual ~Base() {
+    }
+};
+
+struct Derived : Base {
+};
+
+int main() {
+    Base b;
+    Derived d;
+    int x;
+    std::cin >> x;
+
+    Base &bb = x % 2 ? b : d;
+    Derived* dd = dynamic_cast<Derived *>(&bb);
+}
+```
 
 
 
