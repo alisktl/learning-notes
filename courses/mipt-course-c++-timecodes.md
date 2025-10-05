@@ -78,7 +78,16 @@
 - Virtual destructor problem: 0:57:00
 - Runtime type conversions: 1:10:00
 
+---
 
+## 16. RTTI, реализация механизма виртуальных функций, vtables, vpointers
+- dynamic_cast: 0:01:00
+- RTTI: 0:17:00
+- Virtual tables, imlpementation of virtual functions: 0:26:30
+- Таблица виртуальных функций: 0:30:30
+- Виртуальные функции нельзя инлайнить: 0:45:30
+- Virtual tables with multiple inheritance: 0:49:30
+- Some examples: 0:12:00
 
 
 
