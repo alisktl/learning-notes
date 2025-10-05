@@ -3708,8 +3708,45 @@ int main() {
 }
 ```
 
-## `typeid`
+## RTTI
+**RTTI** – Run-Time Type Information
 Если объект полиморфный, то в нем есть скрытое поле, которое хранит какой он тип на самом деле.
+```
+struct Base {
+    virtual ~Base() = default;
+};
+
+struct Derived : Base {
+};
+
+int main() {
+    Derived d;
+    Base b;
+    Base &b2 = b;
+    Base &b3 = d;
+
+    int a = 1;
+
+    std::cout << typeid(b2).name() << std::endl;
+    std::cout << typeid(b3).name() << std::endl;
+    std::cout << typeid(a).name() << std::endl;
+}
+```
+
+## Virtual tables, imlpementation of virtual functions
+TODO: Add
+
+## Таблица виртуальных функций
+TODO: Add
+
+## Виртуальные функции нельзя инлайнить
+TODO: Add
+
+## Virtual tables with multiple inheritance
+TODO: Add
+
+## Some examples
+TODO: Add
 
 
 
