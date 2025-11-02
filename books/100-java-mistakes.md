@@ -2,9 +2,9 @@
 
 - Managing code quality
 - 2. Expressions
-  - 2.1. Mistake #1: Incorrect assumptions about numeric operator precedence
-  - 2.2. Mistake #2: Missing parentheses in conditions
-  - 2.3. Mistake #3: Accidental concatenation instead of addition
+  - [2.1. Mistake #1: Incorrect assumptions about numeric operator precedence](#21-mistake-1-incorrect-assumptions-about-numeric-operator-precedence)
+  - [2.2. Mistake #2: Missing parentheses in conditions](#22-mistake-2-missing-parentheses-in-conditions)
+  - [2.3. Mistake #3: Accidental concatenation instead of addition](#23-mistake-3-accidental-concatenation-instead-of-addition)
   - 2.4. Mistake #4: Multiline string literals
   - 2.5. Mistake #5: Unary plus
   - 2.6. Mistake #6: Implicit type conversion in conditional expressions
