@@ -1,6 +1,23 @@
 # 100 Java Mistakes and How to Avoid Them
 
-## Mistake #1: Incorrect assumptions about numeric operator precedence
+- Managing code quality
+- 2. Expressions
+  - 2.1. Mistake #1: Incorrect assumptions about numeric operator precedence
+  - 2.2. Mistake #2: Missing parentheses in conditions
+  - 2.3. Mistake #3: Accidental concatenation instead of addition
+  - 2.4. Mistake #4: Multiline string literals
+  - 2.5. Mistake #5: Unary plus
+  - 2.6. Mistake #6: Implicit type conversion in conditional expressions
+  - 2.7. Mistake #7: Using non-short-circuit logic operators
+  - 2.8. Mistake #8: Confusing `&&` and `||`
+  - 2.9. Mistake #9: Incorrectly using variable arity calls
+  - 2.10. Mistake #10: Conditional operators and variable arity calls
+  - 2.11. Mistake #11: Ignoring an important return value
+  - 2.12. Mistake #12: Not using a newly created object
+  - 2.13. Mistake #13: Binding a method reference to the wrong method
+  - 2.14. Mistake #14: Using the wrong in a method reference
+
+## 2.1. Mistake #1: Incorrect assumptions about numeric operator precedence
 ### Binary shift
 wrong:
 ```
@@ -42,7 +59,7 @@ static int updateBits() {
 }
 ```
 
-## Mistake #2: Missing parentheses in conditions
+## 2.2. Mistake #2: Missing parentheses in conditions
 ### && and || precedence
 wrong:
 ```
@@ -103,7 +120,7 @@ or:
 return "Value: %s".formatted(value != null ? value : "(unknown)");
 ```
 
-## Mistake #3: Accidental concatenation instead of addition
+## 2.3. Mistake #3: Accidental concatenation instead of addition
 
 
 
