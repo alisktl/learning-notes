@@ -121,6 +121,27 @@ return "Value: %s".formatted(value != null ? value : "(unknown)");
 ```
 
 ## 2.3. Mistake #3: Accidental concatenation instead of addition
+wrong:
+```
+String entryName = "Entry#" + index + 1;
+```
+
+correct:
+```
+String entryName = "Entry#" + (index + 1);
+```
+or:
+```
+int adjustedIndex = index + 1;
+String entryName = "Entry#" + adjustedIndex;
+```
+or:
+```
+String entryName = String.format("Entry#%d", index + 1);
+```
+
+## 2.4. Mistake #4: Multiline string literals
+
 
 
 
