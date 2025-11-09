@@ -142,7 +142,7 @@ public class SUTTest {
 mvn -Dtest=SUTTest.java clean install
 ```
 
-### 2.2. The `@DisplayName` annotation
+#### 2.1.1. The `@DisplayName` annotation
 `SUT.java`:
 ```
 public class SUT {
@@ -194,6 +194,175 @@ public class DisplayNameTest {
 }
 ```
 
+#### 2.1.2. The `@Disabled` annotation
+Disabled class:
+```
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+@Disabled("Feature is still under construction.")
+public class DisabledClassTest {
+    private SUT systemUnderTest = new SUT("Our system under test");
+
+    @Test
+    public void testRegularWork() {
+        boolean canReceiveRegularWork = systemUnderTest.canReceiveRegularWork();
+        assertTrue(canReceiveRegularWork);
+    }
+
+    @Test
+    public void testAdditionalWork() {
+        boolean canReceiveAdditionalWork = systemUnderTest.canReceiveAdditionalWork();
+        assertFalse(canReceiveAdditionalWork);
+    }
+}
+```
+
+Disabled methods:
+```
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class DisabledMethodsTest {
+    private SUT systemUnderTest = new SUT("Our system under test");
+
+    @Test
+    @Disabled
+    public void testRegularWork() {
+        boolean canReceiveRegularWork = systemUnderTest.canReceiveRegularWork();
+        assertTrue(canReceiveRegularWork);
+    }
+
+    @Test
+    @Disabled("Feature still under construction.")
+    public void testAdditionalWork() {
+        boolean canReceiveAdditionalWork = systemUnderTest.canReceiveAdditionalWork();
+        assertFalse(canReceiveAdditionalWork);
+    }
+}
+```
+
+### 2.2. Nested tests
+`Gender.java`:
+```
+public enum Gender {
+    MALE,
+    FEMALE,
+    OTHER
+}
+```
+
+`Customer.java`:
+```
+import java.util.Date;
+
+public class Customer {
+    private final Gender gender;
+    private final String firstName;
+    private final String lastName;
+    private final String middleName;
+    private final Date becomeCustomerDate;
+
+    public Customer(Builder builder) {
+        this.gender = builder.gender;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.middleName = builder.middleName;
+        this.becomeCustomerDate = builder.becomeCustomerDate;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public Date getBecomeCustomerDate() {
+        return becomeCustomerDate;
+    }
+
+    public static class Builder {
+        private final Gender gender;
+        private final String firstName;
+        private final String lastName;
+        private String middleName;
+        private Date becomeCustomerDate;
+
+        public Builder(final Gender gender, final String firstName, final String lastName) {
+            this.gender = gender;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public Builder withMiddleName(final String middleName) {
+            this.middleName = middleName;
+            return this;
+        }
+
+        public Builder withBecomeCustomerDate(final Date becomeCustomerDate) {
+            this.becomeCustomerDate = becomeCustomerDate;
+            return this;
+        }
+
+        public Customer build() {
+            return new Customer(this);
+        }
+    }
+}
+```
+
+`NestedTestsTest.java`:
+```
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class NestedTestsTest {
+    private static final String FIRST_NAME = "John";
+    private static final String LAST_NAME = "Smith";
+
+    @Nested
+    class BuilderTest {
+        private String MIDDLE_NAME = "Michael";
+
+        @Test
+        void customerBuilder() throws ParseException {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+            Date customerDate = sdf.parse("04-21-2019");
+
+            Customer customer = new Customer.Builder(Gender.MALE, FIRST_NAME, LAST_NAME)
+                    .withMiddleName(MIDDLE_NAME)
+                    .withBecomeCustomerDate(customerDate).build();
+
+            assertAll(() -> {
+                assertEquals(Gender.MALE, customer.getGender());
+                assertEquals(FIRST_NAME, customer.getFirstName());
+                assertEquals(LAST_NAME, customer.getLastName());
+                assertEquals(MIDDLE_NAME, customer.getMiddleName());
+                assertEquals(customerDate, customer.getBecomeCustomerDate());
+            });
+        }
+    }
+}
+```
 
 
 
