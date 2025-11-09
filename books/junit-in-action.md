@@ -1,7 +1,7 @@
 # jUnit in Action. 3rd Edition
 
 ## 1. jUnit jump-start
-Add minimal dependencies:
+### 1.1. Add minimal dependencies:
 ```
 <dependency>
     <groupId>org.junit.jupiter</groupId>
@@ -23,6 +23,7 @@ testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.1")
 testImplementation("org.junit.jupiter:junit-jupiter-engine:6.0.1")
 ```
 
+### 1.2. Simple example
 Calculator.java:
 ```
 public class Calculator {
@@ -47,3 +48,40 @@ public class CalculatorTest {
     }
 }
 ```
+
+## 2. Exploring core jUnit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
