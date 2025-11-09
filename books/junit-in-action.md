@@ -22,3 +22,28 @@ or:
 testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.1")
 testImplementation("org.junit.jupiter:junit-jupiter-engine:6.0.1")
 ```
+
+Calculator.java:
+```
+public class Calculator {
+    public double add(double number1, double number2) {
+        return number1 + number2;
+    }
+}
+```
+
+CalculatorTest.java:
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorTest {
+
+    @Test
+    public void testAdd() {
+        Calculator calc = new Calculator();
+        double result = calc.add(10, 50);
+        assertEquals(60, result, 0);
+    }
+}
+```
