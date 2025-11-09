@@ -364,9 +364,68 @@ public class NestedTestsTest {
 }
 ```
 
+### 2.3. Tagged tests
+`Customer.java`:
+```
+public class Customer {
+    private final String fullName;
 
+    public String getFullName() {
+        return fullName;
+    }
 
+    public Customer(String fullName) {
+        this.fullName = fullName;
+    }
+}
+```
 
+`CustomerFirstTest.java`:
+```
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@Tag("individual-1")
+public class CustomerFirstTest {
+    private String CUSTOMER_NAME = "John Smith";
+
+    @Test
+    void testCustomer() {
+        Customer customer = new Customer(CUSTOMER_NAME);
+        assertEquals("John Smith", customer.getFullName());
+    }
+}
+```
+
+`CustomerSecondTest.java`:
+```
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@Tag("individual-2")
+public class CustomerSecondTest {
+    private String CUSTOMER_NAME = "John Smith";
+
+    @Test
+    void testCustomer() {
+        Customer customer = new Customer(CUSTOMER_NAME);
+        assertEquals("John", customer.getFullName());
+    }
+}
+```
+
+`build.gradle.kts`:
+```
+tasks.test {
+    useJUnitPlatform {
+        includeTags("individual-1")
+        //excludeTags("individual-2")
+    }
+}
+```
 
 
 
